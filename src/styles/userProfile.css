@@ -1,0 +1,171 @@
+* {
+    box-sizing: border-box;
+}
+
+.user-layout {
+    background-color: #252525;
+    min-width: 350px;
+    width: 100%;
+    max-width: 450px;
+    border-radius: 26px;
+    margin: 20% 30%;
+}
+
+.user-layout-header {
+    border-bottom: 1px solid rgba(169, 165, 165, 1);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.menu-button {
+    background-color: transparent;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    padding: 0.5rem;
+    margin-left: 1rem;
+    box-shadow: 1px 1px 3px 0px rgba(169, 165, 165, 1);
+}
+
+.menu-button:hover {
+    background-color: rgba(46, 204, 113, 0.9);
+}
+
+.title {
+    color: white;
+    font-size: 2rem;
+    margin: 0;
+}
+
+.user-profile {
+    background-color: white;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    margin-right: 1rem;
+}
+
+/*********************************************/
+
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 100%;
+    max-width: 500px;
+}
+
+/*start name fields inputs layout*/
+.name-container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 1rem;
+}
+
+.name-container .first-name {
+    width: 50%;
+}
+
+.name-container .last-name {
+    width: 50%;
+}
+
+/*ends name fields inputs layout*/
+
+/*start body fields inputs layout*/
+
+.heigth-container {
+    display: flex;
+    margin-bottom: 1rem;
+    gap: 20px;
+}
+
+.weight-container {
+    display: flex;
+    margin-bottom: 1rem;
+    gap: 20px;
+}
+
+.body-info {
+    width: 48%;
+}
+
+.body-info-unit {
+    width: 30%;
+}
+
+/*ends name fields inputs layout*/
+
+label {
+    color: #847e7e;
+    font-size: 20px;
+    margin-bottom: 0.5rem;
+}
+
+.user-profile-inputs {
+    color: white;
+    border: 1px solid #ffffff;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+
+label[for='date-of-birth'] {
+    margin-top: 0;
+}
+
+select {
+    color: #847e7e;
+    border: 1px solid #ffffff;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 10px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+}
+
+input[type='date'] {
+    font-family: monospace;
+    border: 1.2px solid rgb(102, 102, 102);
+    color: #847e7e;
+    filter: invert(1);
+}
+
+.save-btn {
+    background-color: rgba(46, 204, 113, 1);
+    border: none;
+    border-radius: 29px;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    height: 45px;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    min-width: 150px;
+}
+
+.delete-btn {
+    background-Color: #FF0101;
+    border: none;
+    border-radius: 29px;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    height: 45px;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    min-width: 150px
+}
+
+.save-btn:hover {
+    background-color: rgba(46, 204, 113, 0.9);
+}
+
+.delete-btn:hover {
+    background-color: rgb(229, 5, 12);
+}

@@ -1,0 +1,87 @@
+.back-btn {
+    font-size: 2rem;
+    background-color: transparent;
+    border: none;
+    color: #847E7E;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.title {
+    color: white;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 39px;
+}
+
+.paragraph {
+    color: #847E7E;
+    padding: 8%;
+    max-width: 85%;
+    min-width: 90%;
+    margin-top: -7%;
+}
+
+.input-group {
+    display: inline-block;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 10px;
+    gap: 10px;
+    margin-bottom: 4rem;
+}
+
+.input-group input {
+    height: 50px;
+    text-align: center;
+    font-size: 1.2rem;
+    border: 1px solid #FFFFFF;
+    background-color: transparent;
+    border-radius: 5px;
+    width: 17%;
+    max-width: 17%;
+    margin: 7px;
+    color: white;
+}
+
+.input-group input:last-child {
+    margin-right: 0;
+}
+
+.invalid {
+    animation: flash 1s;
+}
+
+/* flashes red border and then fades back to white */
+@keyframes flash {
+    5% {
+        border-color: crimson;
+    }
+
+    100% {
+        border-color: #FFFFFF;
+        ;
+    }
+}
+
+
+.confirm-btn {
+    background-color: rgba(46, 204, 113, 1);
+    border: none;
+    border-radius: 29px;
+    width: 65%;
+    min-width: 150px;
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+    height: 45px;
+    cursor: pointer;
+}
+
+.resend {
+    color: rgba(46, 204, 113, 1);
+    text-align: center;
+}

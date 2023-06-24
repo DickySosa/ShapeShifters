@@ -1,0 +1,34 @@
+.submit-btn {
+    background-color: rgba(46, 204, 113, 1);
+    border: none;
+    border-radius: 29px;
+    width: 65%;
+    min-width: 150px;
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+    height: 45px;
+}
+
+.register-input-fields {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid rgba(169, 165, 165, 1);
+    background-color: rgba(0, 0, 0, 0);
+    width: 65%;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+span {
+    color: red;
+    display: flex;
+    margin-left: 17%;
+    margin-top: -2rem;
+    margin-bottom: 1rem;
+
+}
+
+.success-mesagge {
+    color: rgba(46, 204, 113, 1);
+}
