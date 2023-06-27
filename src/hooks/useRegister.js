@@ -42,18 +42,29 @@ const useRegister = (initialForm, validateForm) => {
         body: JSON.stringify(form),
         Accept: 'application/json',
       })
-        .then(response => {  //response.json())
-          setLoading(false);
-          setResponse(true)
-        
-        //.then(data => {
-          // Maneja la respuesta del servidor después de guardar los datos en la base de datos
-        //})
-        //.catch(error => {
-          // Maneja cualquier error que ocurra durante la solicitud
-        //});
+      .then(response => response.json())
+      .then(data => {
+        setLoading(false);
+        setResponse(true);
+  
+        // Maneja la respuesta del servidor después de guardar los datos en la base de datos
+        if (data && data.success) {
+          // Hacer algo si la respuesta indica éxito
+          console.log('¡Los datos se guardaron correctamente!');
+          navigate('/confirmation-code'); // Redireccionar al usuario a otra página
+        } else {
+          // Hacer algo si la respuesta indica error
+          console.error('Hubo un error al guardar los datos:', data.error);
+          // Mostrar un mensaje de error al usuario, por ejemplo
+        }
+      })
+      .catch(error => {
+        setLoading(false);
+        // Maneja cualquier error que ocurra durante la solicitud
+        console.error('Error:', error);
+        // Mostrar un mensaje de error al usuario, por ejemplo
       });
-      navigate('/confirmation-code')
+      // navigate('/confirmation-code')
   };
 
   return {

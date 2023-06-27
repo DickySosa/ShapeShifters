@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -16,6 +16,11 @@ const useSignIn = (initialForm, validateForm) => {
 			[name]: value
 		})
 	}
+
+	// useEffect(() => {
+	// 	setLoading(false)
+
+	// },[])
 
 	const handleBlur = (e) => {
 		handleChange(e);

@@ -22,16 +22,28 @@ client.connect()
    * @example client.query('CREATE TABLE IF NOEXISTS users')
    */ 
 
-  
+  const user_data = `CREATE TABLE IF NOT EXISTS users_data (  
+    id SERIAL PRIMARY KEY, 
+    username VARCHAR(255) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+  );`;
 
-  app.get('/users', (req, res) => {
-  // Retrieve users from the database
-  client.query('INSERT INTO users')
-    .then((result) => {
-      res.json(result.rows);
-    })
+app.post('/users', (req, res) => {
+  const createTableQuery = {
+    text: user_data,
+  };
+
+  const insertUserQuery = {
+    text: 'INSERT INTO users_data (username, email, password) VALUES ($1, $2, $3)',
+    values: [req.body.username, req.body.email, req.body.password],
+  };
+
+  client.query(createTableQuery)
+    .then(() => client.query(insertUserQuery))
+    .then(() => res.status(200).json({ message: 'User created successfully' }))
     .catch((err) => {
-      console.error('Error retrieving users:', err);
+      console.error('Error creating user:', err);
       res.status(500).json({ error: 'An error occurred' });
     });
 });
