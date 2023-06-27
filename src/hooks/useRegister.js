@@ -34,7 +34,7 @@ const useRegister = (initialForm, validateForm) => {
       console.log(form);
       setLoading(true);
       
-      fetch('http://localhost:8000/formulario', {
+      fetch('http://localhost:8000/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,7 +64,6 @@ const useRegister = (initialForm, validateForm) => {
         console.error('Error:', error);
         // Mostrar un mensaje de error al usuario, por ejemplo
       });
-      // navigate('/confirmation-code')
   };
 
   return {

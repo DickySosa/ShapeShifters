@@ -122,6 +122,10 @@ const Register = () => {
 
       {errors.confirmPassword && <span>{errors.confirmPassword}</span>}
 
+      <br/>
+      {loading && <Loader/>}
+      <br/>
+
       <button
         type="submit"
         value="SIGN IN"
@@ -129,9 +133,9 @@ const Register = () => {
         disabled={handleDisabled()}
       >
         REGISTER
-      </button>
-      <br></br> 
-      {loading && <Loader/>}
+      </button> 
+       
+      
     </form>
   );
 };
