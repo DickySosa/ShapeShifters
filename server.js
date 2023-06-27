@@ -1,7 +1,11 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-app.use(cors());
+const bodyParser = require('body-parser');
+
+app.use(cors()); // Enable CORS
+app.use(bodyParser.json()); // Enable parsing JSON bodies
+
 const { Client } = require('pg');
 const dbConfig = require('./dbConfig');
 
