@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 
 
@@ -22,10 +22,6 @@ const useRegister = (initialForm, validateForm) => {
     setErrors(validateForm(form));
   };
 
-  // useEffect(() => {
-  //   console.log('Change', form)
-  // },[form])
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors(validateForm(form));
@@ -33,8 +29,30 @@ const useRegister = (initialForm, validateForm) => {
     if (Object.keys(errors).length > 0) {
       return;
     }
+
+    alert('Sending Form ')
       console.log(form);
       setLoading(true);
+      
+      fetch('http://localhost:8000/formulario', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+        Accept: 'application/json',
+      })
+        .then(response => {  //response.json())
+          setLoading(false);
+          setResponse(true)
+        
+        //.then(data => {
+          // Maneja la respuesta del servidor después de guardar los datos en la base de datos
+        //})
+        //.catch(error => {
+          // Maneja cualquier error que ocurra durante la solicitud
+        //});
+      });
       navigate('/confirmation-code')
   };
 

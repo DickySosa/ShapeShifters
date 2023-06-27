@@ -1,6 +1,8 @@
 import React from 'react';
 import '../styles/register.css';
 import useRegister from '../hooks/useRegister';
+import Loader from './Loader';
+import Message from './Message';
 
 const initialForm = {
   username: '',
@@ -128,6 +130,8 @@ const Register = () => {
       >
         REGISTER
       </button>
+      <Loader/>
+      <Message/>
     </form>
   );
 };

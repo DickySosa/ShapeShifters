@@ -20,7 +20,7 @@ client.connect()
 
   app.get('/users', (req, res) => {
   // Retrieve users from the database
-  client.query('SELECT * FROM users')
+  client.query('INSERT INTO users')
     .then((result) => {
       res.json(result.rows);
     })
