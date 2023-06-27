@@ -1,9 +1,7 @@
 const express = require('express');
 const app = express();
 const { Client } = require('pg');
-
-/** Go to README.md for instructions */
-const { dbConfig } = require('./dbConfig');
+const dbConfig = require('./dbConfig');
 
 /** Client config to 
  * be able to connect to local database
