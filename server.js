@@ -22,6 +22,8 @@ client.connect()
    * @example client.query('CREATE TABLE IF NOEXISTS users')
    */ 
 
+  
+
   app.get('/users', (req, res) => {
   // Retrieve users from the database
   client.query('INSERT INTO users')

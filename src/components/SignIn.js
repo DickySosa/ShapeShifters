@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/signIn.css';
 import useSignIn from '../hooks/useSignIn';
+import Loader from './Loader';
 import { useNavigate } from 'react-router-dom';
 
 const initialForm = {
@@ -88,7 +89,7 @@ const SignIn = () => {
         Forgot Password?
       </button>
 
-      <br></br>
+      <br></br> 
 
       <button
         type="submit"
@@ -98,6 +99,8 @@ const SignIn = () => {
       >
         SIGN IN
       </button>
+      <br></br> 
+      {loading && <Loader/>}
     </form>
   );
 };
