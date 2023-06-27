@@ -2,13 +2,14 @@ const express = require('express');
 const app = express();
 const { Client } = require('pg');
 
-const client = new Client({
-  host: 'localhost',
-  port: '5432',
-  database: 'users',
-  user: 'postgres',
-  password: 'AdminMaster2023@',
-});
+/** Go to README.md for instructions */
+const { dbConfig } = require('./dbConfig');
+
+/** Client config to 
+ * be able to connect to local database
+ * @readonly This has to be created by each developer.
+ */
+const client = new Client(dbConfig);
 
 client.connect()
   .then(() => {
@@ -17,6 +18,11 @@ client.connect()
   .catch((err) => {
     console.error('Error connecting to the PostgreSQL database:', err);
   });
+
+  /** Write SQL commands to automatically 
+   * create the tables in the database
+   * @example client.query('CREATE TABLE IF NOEXISTS users')
+   */ 
 
   app.get('/users', (req, res) => {
   // Retrieve users from the database

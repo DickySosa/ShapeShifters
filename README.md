@@ -68,3 +68,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Create Database Config
+
+Create a file in the root dir, with this exported config.
+
+```export const dbConfig = {
+  host: 'localhost',
+  port: '5432',
+  database: '{databaseName}',
+  user: '{dbUser}',
+  password: '{dbPassword}',
+}```
