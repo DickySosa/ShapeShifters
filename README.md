@@ -73,10 +73,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 Create a file in the root dir, with this exported config.
 
-```export const dbConfig = {
-  host: 'localhost',
-  port: '5432',
-  database: '{databaseName}',
-  user: '{dbUser}',
-  password: '{dbPassword}',
-}```
+```
+module.exports = {
+    host: 'localhost',
+    port: '5432',
+    database: 'shapeshifters-dev',
+    user: 'postgres',
+    password: 'admin$123',
+};
+```
