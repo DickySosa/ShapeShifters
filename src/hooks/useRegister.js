@@ -47,22 +47,17 @@ const useRegister = (initialForm, validateForm) => {
         setLoading(false);
         setResponse(true);
   
-        // Maneja la respuesta del servidor después de guardar los datos en la base de datos
         if (data && data.success) {
-          // Hacer algo si la respuesta indica éxito
           console.log('¡Los datos se guardaron correctamente!');
           navigate('/confirmation-code');
         } else {
-          // Hacer algo si la respuesta indica error
+
           console.error('Hubo un error al guardar los datos:', data.error);
-          // Mostrar un mensaje de error al usuario, por ejemplo
         }
       })
       .catch(error => {
         setLoading(false);
-        // Maneja cualquier error que ocurra durante la solicitud
         console.error('Error:', error);
-        // Mostrar un mensaje de error al usuario, por ejemplo
       });
   };
 
