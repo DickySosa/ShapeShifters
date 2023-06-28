@@ -51,7 +51,7 @@ const useRegister = (initialForm, validateForm) => {
         if (data && data.success) {
           // Hacer algo si la respuesta indica éxito
           console.log('¡Los datos se guardaron correctamente!');
-          navigate('/confirmation-code'); // Redireccionar al usuario a otra página
+          navigate('/confirmation-code');
         } else {
           // Hacer algo si la respuesta indica error
           console.error('Hubo un error al guardar los datos:', data.error);
