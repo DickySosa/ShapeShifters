@@ -54,7 +54,7 @@ const useRegister = (initialForm, validateForm) => {
       setLoading(false);
       console.error('Error:', error);
     }
-  }; //fin 
+  }; 
 
   return {
     form,
