@@ -22,44 +22,39 @@ const useRegister = (initialForm, validateForm) => {
     setErrors(validateForm(form));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors(validateForm(form));
-
+  
     if (Object.keys(errors).length > 0) {
       return;
     }
-
-    alert('Sending Form ')
-      console.log(form);
-      setLoading(true);
-      
-      fetch('http://localhost:8000/users', {
+  
+    setLoading(true);
+  
+    try {
+      const response = await fetch('http://localhost:8000/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(form),
-        Accept: 'application/json',
-      })
-      .then(response => response.json())
-      .then(data => {
-        setLoading(false);
-        setResponse(true);
-  
-        if (data && data.success) {
-          console.log('¡Los datos se guardaron correctamente!');
-          navigate('/confirmation-code');
-        } // else {
-
-        //   console.error('Hubo un error al guardar los datos:', data.error);
-        // }
-      })
-      .catch(error => {
-        setLoading(false);
-        console.error('Error:', error);
       });
-  };
+  
+      const data = await response.json();
+  
+      setLoading(false);
+      setResponse(true);
+  
+      if (data) {
+        console.log('Data save succesfully!');
+        navigate('/confirmation-code');
+      }
+    } catch (error) {
+      setLoading(false);
+      console.error('Error:', error);
+    }
+  }; //fin 
 
   return {
     form,
