@@ -11,6 +11,7 @@ const initialForm = {
   password: '',
   confirmPassword: '',
 };
+
 const validationsForm = (form) => {
   let errors = {};
   let regexUsername = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]{6,}$/;
@@ -125,7 +126,7 @@ const Register = () => {
 
       <br/>
       {loading && <Loader/>}
-      {response && <Message />}
+      {response && <Message msg={`Error ${errors}`} bgColor="dc3545" />}
       <br/>
 
       <button

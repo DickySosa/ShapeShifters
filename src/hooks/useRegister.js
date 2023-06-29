@@ -50,10 +50,10 @@ const useRegister = (initialForm, validateForm) => {
         if (data && data.success) {
           console.log('¡Los datos se guardaron correctamente!');
           navigate('/confirmation-code');
-        } else {
+        } // else {
 
-          console.error('Hubo un error al guardar los datos:', data.error);
-        }
+        //   console.error('Hubo un error al guardar los datos:', data.error);
+        // }
       })
       .catch(error => {
         setLoading(false);
