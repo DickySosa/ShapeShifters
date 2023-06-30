@@ -35,18 +35,18 @@ client.connect()
     password VARCHAR(255) NOT NULL
   );`;
 
-app.post('/users', (req, res) => {
+app.post('/register', (req, res) => {
   const createTableQuery = {
     text: user_data,
   };
 
-  const insertUserQuery = {
+  const registerQuery = {
     text: 'INSERT INTO users_data (username, email, password) VALUES ($1, $2, $3)',
     values: [req.body.username, req.body.email, req.body.password],
   };
 
   client.query(createTableQuery)
-    .then(() => client.query(insertUserQuery))
+    .then(() => client.query(registerQuery))
     .then(() => res.status(200).json({ message: 'User created successfully' }))
     .catch((err) => {
       console.error('Error creating user:', err);

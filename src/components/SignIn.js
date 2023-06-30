@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/signIn.css';
 import useSignIn from '../hooks/useSignIn';
 import Loader from './Loader';
+import Message from './Message';
 import { useNavigate } from 'react-router-dom';
 
 const initialForm = {
@@ -101,6 +102,7 @@ const SignIn = () => {
       </button>
       <br></br> 
       {loading && <Loader/>}
+      {response && <Message msg={`Error ${errors}`} bgColor="dc3545"/>}
     </form>
   );
 };

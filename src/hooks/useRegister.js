@@ -33,7 +33,7 @@ const useRegister = (initialForm, validateForm) => {
     setLoading(true);
   
     try {
-      const response = await fetch('http://localhost:8000/users', {
+      const response = await fetch('http://localhost:8000/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
