@@ -52,8 +52,11 @@ const useRegister = (initialForm, validateForm) => {
       navigate('/confirmation-code');
     } else {
       setLoading(false);
-      setServerError(data.error);
-      console.error('Error:', data.error);
+      if(data.error === '23505'){
+        setServerError('User already exist');
+      }
+      
+      console.error(data.error);
     }
     
   };

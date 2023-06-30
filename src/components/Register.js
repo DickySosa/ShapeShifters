@@ -127,7 +127,7 @@ const Register = () => {
 
       <br/>
       {loading && <Loader/>}
-      {response && <Message msg={`Error ${serverError}`} bgColor="dc3545" />}
+      {response && <Message msg={`${serverError}`} bgColor="dc3545" />}
       <br/>
 
       <button
