@@ -50,7 +50,7 @@ app.post('/register', (req, res) => {
     .then(() => res.status(200).json({ message: 'User created successfully' }))
     .catch((err) => {
       console.error('Error creating user:', err);
-      res.status(500).json({ error: 'An error occurred' });
+      res.status(500).json({ error: err.detail });
     });
 });
 

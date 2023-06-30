@@ -59,6 +59,7 @@ const Register = () => {
     errors,
     loading,
     response,
+    serverError,
     handleChange,
     handleBlur,
     handleSubmit,
@@ -126,7 +127,7 @@ const Register = () => {
 
       <br/>
       {loading && <Loader/>}
-      {response && <Message msg={`Error ${errors}`} bgColor="dc3545" />}
+      {response && <Message msg={`Error ${serverError}`} bgColor="dc3545" />}
       <br/>
 
       <button
@@ -137,6 +138,61 @@ const Register = () => {
       >
         REGISTER
       </button> 
+
+      <button type="reset" value="RESET" className="reset-btn" onClick={async () => {
+        console.log('Start of async shit...');
+
+        // function that returns a promise
+        const mockApiCall = (error) => {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              if (error) {
+                reject('failed succesfully!')
+              }
+              resolve('all good!')
+            }, 2000)
+          })
+        }
+
+        // 1. .then .catch
+        // Promise chaining -> err -> res -> ?
+        // mockApiCall(true)
+        //   .catch((error) => {
+        //     console.log('async error -> ', error)
+        //     return error
+        //   })
+        //   .then((result) => {
+        //     console.log('async result chain 1 -> ', result)
+        //     return { displayError: 'User already exists...'}
+        //   })
+        //   .then((result) => {
+        //     console.log('async result chain 2 -> ', result)
+        //     return { mappedResult: result + ' mapped...' }
+        //   })
+        //   .finally(() => {
+        //     console.log('finally ... ')
+        //   })
+
+
+        // 2. async/await
+        // try/catch block
+        let result = null;
+        try {
+          result = await mockApiCall(true)
+          console.log('async result -> ', result)
+        } catch (error) {
+          console.log('async error -> ', error)
+        }
+
+        // map result
+        // write sync code as normal
+        
+        // End of function
+        console.log('End of async shit...')
+
+      }}>
+        DO ASYNC SHIT
+      </button>
        
       
     </form>
