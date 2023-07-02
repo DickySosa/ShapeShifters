@@ -28,6 +28,7 @@ client.connect()
    * @example client.query('CREATE TABLE IF NOEXISTS users')
    */ 
 
+  /* Registration fetch**************/
   const user_data = `CREATE TABLE IF NOT EXISTS users_data (  
     id SERIAL PRIMARY KEY, 
     username VARCHAR(255) NOT NULL UNIQUE,
@@ -53,6 +54,11 @@ app.post('/register', (req, res) => {
       res.status(500).json({ error: err.code });
     });
 });
+
+
+/* sign in fetch************/
+
+
 
 const port = 8000; // Specify the port number you want to use
 app.listen(port, () => {
