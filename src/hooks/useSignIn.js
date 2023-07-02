@@ -46,7 +46,7 @@ const useSignIn = (initialForm, validateForm) => {
 			setLoading(false);
             setResponse(true);
 
-			if(data){
+			if(!data.error){
 				console.log('User exist');
 				navigate('/home')
 			}

@@ -3,19 +3,19 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-app.use(cors()); // Enable CORS
-app.use(bodyParser.json()); // Enable parsing JSON bodies
+ app.use(cors()); // Enable CORS
+ app.use(bodyParser.json()); // Enable parsing JSON bodies
 
-const { Client } = require('pg');
-const dbConfig = require('./dbConfig');
+ const { Client } = require('pg');
+ const dbConfig = require('./dbConfig');
 
-/** Client config to 
+ /** Client config to 
  * be able to connect to local database
  * @readonly This has to be created by each developer.
  */
-const client = new Client(dbConfig);
+ const client = new Client(dbConfig);
 
-client.connect()
+ client.connect()
   .then(() => {
     console.log('Connected to the PostgreSQL database');
   })
@@ -36,17 +36,17 @@ client.connect()
     password VARCHAR(255) NOT NULL
   );`;
 
-app.post('/register', (req, res) => {
-  const createTableQuery = {
+   app.post('/register', (req, res) => {
+   const createTableQuery = {
     text: user_data,
-  };
+   };
 
-  const registerQuery = {
+   const registerQuery = {
     text: 'INSERT INTO users_data (username, email, password) VALUES ($1, $2, $3)',
     values: [req.body.username, req.body.email, req.body.password],
-  };
+   };
 
-  client.query(createTableQuery)
+   client.query(createTableQuery)
     .then(() => client.query(registerQuery))
     .then(() => res.status(200).json({ message: 'User created successfully' }))
     .catch((err) => {
@@ -58,7 +58,22 @@ app.post('/register', (req, res) => {
 
 /* sign in fetch************/
 
+app.get('signin', (req, res) => {
+  const signInValues = [req.body.email, req.body.password];
 
+  // Realiza la consulta en la base de datos
+  client.query('SELECT * FROM usuarios WHERE email = $1', [signInValues], (error, result) => {
+    if (error) {
+      res.status(500).json({ error: 'Error en el servidor' });
+    } else {
+      if (result.rows.length > 0) {
+        res.json({ message: 'El usuario ya está registrado' });
+      } else {
+        res.json({ message: 'El usuario no está registrado' });
+      }
+    }
+  });
+});
 
 const port = 8000; // Specify the port number you want to use
 app.listen(port, () => {
