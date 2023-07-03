@@ -139,10 +139,10 @@ const Register = () => {
         REGISTER
       </button> 
 
-      <button type="reset" value="RESET" className="reset-btn" onClick={async () => {
+      {/* <button type="reset" value="RESET" className="reset-btn" onClick={async () => {
         console.log('Start of async shit...');
 
-        // function that returns a promise
+        function that returns a promise
         const mockApiCall = (error) => {
           return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -154,28 +154,28 @@ const Register = () => {
           })
         }
 
-        // 1. .then .catch
-        // Promise chaining -> err -> res -> ?
-        // mockApiCall(true)
-        //   .catch((error) => {
-        //     console.log('async error -> ', error)
-        //     return error
-        //   })
-        //   .then((result) => {
-        //     console.log('async result chain 1 -> ', result)
-        //     return { displayError: 'User already exists...'}
-        //   })
-        //   .then((result) => {
-        //     console.log('async result chain 2 -> ', result)
-        //     return { mappedResult: result + ' mapped...' }
-        //   })
-        //   .finally(() => {
-        //     console.log('finally ... ')
-        //   })
+        1. .then .catch
+        Promise chaining -> err -> res -> ?
+        mockApiCall(true)
+          .catch((error) => {
+            console.log('async error -> ', error)
+            return error
+          })
+          .then((result) => {
+            console.log('async result chain 1 -> ', result)
+            return { displayError: 'User already exists...'}
+          })
+          .then((result) => {
+            console.log('async result chain 2 -> ', result)
+            return { mappedResult: result + ' mapped...' }
+          })
+          .finally(() => {
+            console.log('finally ... ')
+          })
 
 
-        // 2. async/await
-        // try/catch block
+        2. async/await
+        try/catch block
         let result = null;
         try {
           result = await mockApiCall(true)
@@ -184,17 +184,15 @@ const Register = () => {
           console.log('async error -> ', error)
         }
 
-        // map result
-        // write sync code as normal
+        map result
+        write sync code as normal
         
-        // End of function
+        End of function
         console.log('End of async shit...')
 
       }}>
         DO ASYNC SHIT
-      </button>
-       
-      
+      </button> */}
     </form>
   );
 };
