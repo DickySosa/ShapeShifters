@@ -9,6 +9,18 @@ const createUser = (client, username, email, password) => {
        return client.query(registerQuery)
 }
 
+const verifyUser = (client, username, password) => {
+    const signInQuery = {
+        text : `SELECT username, password FROM ${TABLE_NAME} 
+        WHERE username =  ${username}
+        AND
+        password =  ${password}`,
+        values: [username,password],
+    }
+
+    return client.query(signInQuery)
+}
+
 const getAllUsers = () => {
 
 }
@@ -27,4 +39,5 @@ const deleteUser = () => {
 
 module.exports = {
     createUser,
+    verifyUser,
 }

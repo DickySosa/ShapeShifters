@@ -17,6 +17,7 @@ const bodyParser = require('body-parser');
  * be able to connect to local database
  * @readonly This has to be created by each developer.
  */
+
  const client = new Client(dbConfig);
 
  client.connect()
@@ -26,11 +27,6 @@ const bodyParser = require('body-parser');
   .catch((err) => {
     console.error('Error connecting to the PostgreSQL database:', err);
   });
-
-  /** Write SQL commands to automatically 
-   * create the tables in the database
-   * @example client.query('CREATE TABLE IF NOEXISTS users')
-   */ 
 
   /* Registration fetch**************/
   const user_data = `CREATE TABLE IF NOT EXISTS users_data (  
@@ -56,7 +52,7 @@ const bodyParser = require('body-parser');
 
 /* sign in fetch************/
 
-app.get('signin', (req, res) => {
+app.post('signin', (req, res) => {
   const signInValues = [req.body.email, req.body.password];
 
   // Realiza la consulta en la base de datos
