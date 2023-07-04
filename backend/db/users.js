@@ -10,14 +10,11 @@ const createUser = (client, username, email, password) => {
 }
 
 const verifyUser = (client, username, password) => {
+    console.log('verify user...............', username, password)
     const signInQuery = {
-        text : `SELECT username, password FROM ${TABLE_NAME} 
-        WHERE username =  ${username}
-        AND
-        password =  ${password}`,
-        values: [username,password],
+        text : `SELECT username, password FROM ${TABLE_NAME} WHERE username = '${username}' AND password = '${password}'`
     }
-
+    console.log(signInQuery)
     return client.query(signInQuery)
 }
 

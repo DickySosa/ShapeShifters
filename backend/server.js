@@ -36,10 +36,10 @@ const bodyParser = require('body-parser');
     password VARCHAR(255) NOT NULL
   );`;
 
-   app.post('register', (req, res) => {
+   app.post('/register', (req, res) => {
 
-   client.query(user_data)
-    .then(() => dbUsers.createUser(client, req.body.username, req.body.email, req.body.password))
+
+    dbUsers.createUser(client, req.body.username, req.body.email, req.body.password)
     .then(() => res.status(200).json({ message: 'User created successfully' }))
     .catch((err) => {
       console.error('Error creating user:', err);
@@ -49,13 +49,15 @@ const bodyParser = require('body-parser');
 
 /* sign in fetch************/
 
-app.post('signin', (req, res) => {
+app.post('/signin', (req, res) => {
   // Realiza la consulta en la base de datos
-  client.query()
-  .then(() => dbUsers.verifyUser(client, req.body.username,req.body.password))
-  .then(() => res.status(200).json({ message: 'User exist' }))
+  dbUsers.verifyUser(client, req.body.username,req.body.password)
+
+  .then((data) =>  {
+      console.log(data)
+      return res.status(200).json({ message: 'User exist' })})
     .catch((err) => {
-      console.error('Error creating user:', err);
+      console.error('Error getting user:', err);
       res.status(500).json({ error: err.code });
     });
   //   if (error) {
@@ -69,7 +71,7 @@ app.post('signin', (req, res) => {
   //   }
   });
 
-const port = 8000; // Specify the port number you want to use
+const port = 9000; // Specify the port number you want to use
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
