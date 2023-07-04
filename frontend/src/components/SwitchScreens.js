@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import '../App.css';
-import Register from '../components/Register';
-import SignIn from '../components/SignIn';
+import Register from './Register';
+import SignIn from './SignIn';
 
 
 
