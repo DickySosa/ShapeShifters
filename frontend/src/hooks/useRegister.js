@@ -42,21 +42,21 @@ const useRegister = (initialForm, validateForm) => {
     });
 
     const data = await response.json();
-    console.log('try json data -> ', data);
+    console.log('try json data register ---------> ', data);
 
     setLoading(false);
     setResponse(true);
 
-    if (!data.error) {
+    if (!data.RegistingErrors) {
       console.log('Data save succesfully!');
       navigate('/confirmation-code');
     } else {
       setLoading(false);
-      if(data.error === '23505'){
+      if(data.RegistingErrors === '23505'){
         setServerError('User already exist');
       }
       
-      console.error(data.error);
+      console.error(data.RegistingErrors);
     }
     
   };

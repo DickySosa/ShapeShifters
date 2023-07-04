@@ -7,6 +7,8 @@ const useSignIn = (initialForm, validateForm) => {
 	const [errors, setErrors] = useState({})
 	const [loading, setLoading] = useState(false)
 	const [response, setResponse] = useState(null)
+	const [serverError, setServerError] = useState(null);
+
 	const navigate = useNavigate();
 
 	const handleChange = (e) => {
@@ -32,7 +34,7 @@ const useSignIn = (initialForm, validateForm) => {
 
 		setLoading(true)
 
-		try{
+	
 			const fetchRequest = await fetch('http://localhost:9000/signin',{
 				method: 'POST',
 				headers: {
@@ -42,26 +44,27 @@ const useSignIn = (initialForm, validateForm) => {
 			}) 
 
 			const data = await fetchRequest.json()
+			console.log('try json data sign in ---------> ', data);
 
 			setLoading(false);
             setResponse(true);
 
-			if(!data.error){
+			if(!data.SignInErrors && data.Result > 0){
 				console.log('User exist');
 				navigate('/home')
-			}
-		} catch (error){
+			} else {
 			setLoading(false);
-			console.log('Error: ', error)
-			console.log('User must be created')
-
+			console.log('Error: ', data.SignInErrors)
+			if(data.Result === 0){
+				setServerError('Please Register before signing in')
+			}
 		}
 
 	}
 
 
 	return {
-		form, errors, loading, response, handleChange, handleBlur, handleSubmit
+		form, errors, loading, response, handleChange, handleBlur, handleSubmit, serverError
 	}
 }
 

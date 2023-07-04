@@ -50,6 +50,7 @@ const SignIn = () => {
     handleChange,
     handleBlur,
     handleSubmit,
+    serverError,
   } = useSignIn(initialForm, validationsForm);
 
   const handleDisabled = () => {
@@ -90,7 +91,10 @@ const SignIn = () => {
         Forgot Password?
       </button>
 
-      <br></br> 
+      <br/>
+      {loading && <Loader/>}
+      {response && <Message msg={`${serverError}`} bgColor="dc3545" />}
+      <br/>
 
       <button
         type="submit"
@@ -101,8 +105,6 @@ const SignIn = () => {
         SIGN IN
       </button>
       <br></br> 
-      {loading && <Loader/>}
-      {response && <Message msg={`Error ${errors}`} bgColor="dc3545"/>}
     </form>
   );
 };
