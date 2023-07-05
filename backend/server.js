@@ -13,6 +13,10 @@ const bodyParser = require('body-parser');
 
  const dbUsers = require('./db/users')
 
+ /* users CRUD */
+
+ const usersCRUD = require('./controlers/usersCRUD')
+
  /** Client config to 
  * be able to connect to local database
  * @readonly This has to be created by each developer.
@@ -52,7 +56,7 @@ const bodyParser = require('body-parser');
 /* sign in fetch************/
 
 app.post('/signin', (req, res) => {
-  // Realiza la consulta en la base de datos
+
   dbUsers.verifyUser(client, req.body.username,req.body.password)
 
   .then((data) =>  {
@@ -65,7 +69,25 @@ app.post('/signin', (req, res) => {
   
   });
 
-const port = 9000; // Specify the port number you want to use
+const port = 9000; 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+/*** USERS CRUD ***/
+
+app.get('/get-all-users',(req,res) => {
+
+})
+
+app.get('/get-by-id',(req,res) => {
+  
+})
+
+app.put('/update-user',(req,res) => {
+  
+})
+
+app.delete('/delete-user',(req,res) => {
+  
+})
