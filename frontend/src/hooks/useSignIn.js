@@ -54,9 +54,8 @@ const useSignIn = (initialForm, validateForm) => {
 				navigate('/home')
 			} else {
 			setLoading(false);
-			console.log('Error: ', data.SignInErrors)
 			if(data.Result === 0){
-				setServerError('Please Register before signing in')
+				setServerError('Please verify if the user or the password is correct')
 			}
 		}
 
