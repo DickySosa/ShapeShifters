@@ -15,7 +15,7 @@ const bodyParser = require('body-parser');
 
  /* users CRUD */
 
- const usersCRUD = require('./controlers/usersCRUD')
+ const usersCrud = require('./controlers/usersCRUD')
 
  /** Client config to 
  * be able to connect to local database
@@ -55,7 +55,7 @@ const bodyParser = require('body-parser');
 
 /* sign in fetch************/
 
-app.post('/signin', (req, res) => {
+app.post('/sign-in', (req, res) => {
 
   dbUsers.verifyUser(client, req.body.username,req.body.password)
 
@@ -84,8 +84,13 @@ app.get('/get-by-id',(req,res) => {
   
 })
 
-app.put('/update-user',(req,res) => {
-  
+app.put('/update-user', async (req,res) => {
+ try {
+  await usersCrud.updateUser(client, req.body)
+  res.status(200).json({ message: 'OK'})
+ } catch (error) {
+  res.status(500).json({ error: 'DAMN' });
+ }
 })
 
 app.delete('/delete-user',(req,res) => {

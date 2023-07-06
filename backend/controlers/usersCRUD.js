@@ -1,3 +1,5 @@
+const TABLE_NAME = 'users_data';
+
 const getAllUsers = (client) => {
     const getAllUsersQuery = {
         text : `SELECT * FROM ${TABLE_NAME}`
@@ -14,12 +16,14 @@ const getUserById = (client, id) => {
     return client.query(getUsersByIdQuery)
 }
 
-const updateUser = (client, id, username, email, password) => {
+
+
+const updateUser = (client, existingUser) => {
+    const  {id, username, email, password} = existingUser
     const updateUserQuery = {
         text : 
         `UPDATE ${TABLE_NAME} 
         SET
-        id =  ${id},
         username = ${username},
         email = ${email},
         password =  ${password}

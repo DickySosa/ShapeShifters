@@ -35,7 +35,7 @@ const useSignIn = (initialForm, validateForm) => {
 		setLoading(true)
 
 	
-			const fetchRequest = await fetch('http://localhost:9000/signin',{
+			const fetchRequest = await fetch('http://localhost:9000/sign-in',{
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
