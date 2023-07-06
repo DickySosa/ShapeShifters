@@ -3,6 +3,8 @@ import '../styles/register.css';
 import useCreateUser from '../hooks/useCreateUser';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import { Link } from 'react-router-dom';
+
 
 const initialForm = {
     username: '',
@@ -73,6 +75,17 @@ const initialForm = {
     return (
       <form onSubmit={handleSubmit} className='home'>
 
+      <Link
+        className="back-btn"
+        to={'/menu-admin'}
+        style={{
+          display: 'inline-block',
+          marginRight: '100%',
+          borderBottom: 'none',
+        }}
+      >
+        &#8249;
+      </Link>
         <header className="home-main-title">Create User</header>
 
         <input
