@@ -22,22 +22,6 @@ const verifyUser = (client, username, password) => {
     return client.query(signInQuery)
 }
 
-const getAllUsers = () => {
-
-}
-
-const getUserById = () => {
-
-}
-
-const updateUser = () => {
-
-}
-
-const deleteUser = () => {
-
-}
-
 module.exports = {
     createUser,
     verifyUser,
