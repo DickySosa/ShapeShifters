@@ -46,7 +46,7 @@ const MenuButtons = () => {
      </button>
 
      <button 
-        onClick={() => handleNavigation('/admin')}
+        onClick={() => handleNavigation('/menu-admin')}
         className="menú-buttons">
         Admin
         <img 

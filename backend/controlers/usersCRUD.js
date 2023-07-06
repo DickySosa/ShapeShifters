@@ -1,5 +1,15 @@
 const TABLE_NAME = 'users_data';
 
+const createUserFromAdmin = (client, username, email, password) => {
+    const {username, email, password} = createNewUser
+    const registerQuery = {
+        text: `INSERT INTO ${TABLE_NAME} (username, email, password) VALUES ($1, $2, $3)`,
+        values: [username,email,password],
+       };
+
+       return client.query(registerQuery)
+}
+
 const getAllUsers = (client) => {
     const getAllUsersQuery = {
         text : `SELECT * FROM ${TABLE_NAME}`
@@ -42,6 +52,7 @@ const deleteUser = (client, id) => {
 }
 
 module.exports ={
+    createUserFromAdmin,
     getAllUsers,
     getUserById,
     updateUser,

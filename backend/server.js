@@ -76,6 +76,17 @@ app.listen(port, () => {
 
 /*** USERS CRUD ***/
 
+app.post('/create-new-user', async (req, res) => {
+
+  try {
+    await  usersCrud.createUserFromAdmin(client, req.body)
+    console.log(data)
+    res.status(200).json({ message: 'User created successfully' })
+  } catch (error) {
+    res.status(500).json({ RegistingErrors: err.code });
+  }
+});
+
 app.get('/get-all-users',(req,res) => {
 
 })
@@ -89,7 +100,7 @@ app.put('/update-user', async (req,res) => {
   await usersCrud.updateUser(client, req.body)
   res.status(200).json({ message: 'OK'})
  } catch (error) {
-  res.status(500).json({ error: 'DAMN' });
+  res.status(500).json({ error: 'DAMN' }); ///********************** check out this later */
  }
 })
 

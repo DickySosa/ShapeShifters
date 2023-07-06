@@ -3,7 +3,6 @@ import '../styles/register.css';
 import useRegister from '../hooks/useRegister';
 import Loader from './Loader';
 import Message from './Message';
-// import Message from './Message';
 
 const initialForm = {
   username: '',
