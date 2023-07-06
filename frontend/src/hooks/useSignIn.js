@@ -35,7 +35,7 @@ const useSignIn = (initialForm, validateForm) => {
 		setLoading(true)
 
 	
-			const fetchRequest = await fetch('http://localhost:9000/signin',{
+			const fetchRequest = await fetch('http://localhost:9000/sign-in',{
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -54,9 +54,8 @@ const useSignIn = (initialForm, validateForm) => {
 				navigate('/home')
 			} else {
 			setLoading(false);
-			console.log('Error: ', data.SignInErrors)
 			if(data.Result === 0){
-				setServerError('Please Register before signing in')
+				setServerError('Please verify if the user or the password is correct')
 			}
 		}
 
