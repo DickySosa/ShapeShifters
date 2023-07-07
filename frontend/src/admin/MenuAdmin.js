@@ -20,7 +20,7 @@ const MenuAdmin = () => {
                 method: 'GET'
             })
             const allUsers = await data.json();
-            console.log(allUsers)
+            console.log('user ',  allUsers)
             setGetUsers(allUsers)
 
         } catch (error) {
@@ -30,62 +30,50 @@ const MenuAdmin = () => {
     }
     fetchAllUsers();
   }, [])
-
-  
   
 
-    // let getUsersHook = getUsers.Message[0].id;
-    // console.log(getUsersHook)
-
-    
-        // getUsers.Message.map((user) => (
-        //     <li key={user.id} >
-        //       {user.id} - {user.username} - {user.email} - {user.password}
-        //     </li>
-        //   ))
-    
-  
-
-  return (
-    <div className="home">
-        <Link
-        className="back-btn"
-        to={'/home'}
-        style={{
-          display: 'inline-block',
-          marginRight: '100%',
-          marginBottom: '-3px',
-          borderBottom: 'none',
-        }}
-      >
-        &#8249;
-      </Link>
-      <header className="home-main-title">Users</header>
-
-      <main className="add-workout-btn-container">
-        <button
-          onClick={() => handleNavigation('/create-user')}
-          className="add-workout-btn"
-          style={{width:  '100px', height: '30px', marginLeft:'75%', minWidth: '70px'}}
+  if(getUsers){
+    return (
+      <div className="home">
+          <Link
+          className="back-btn"
+          to={'/home'}
+          style={{
+            display: 'inline-block',
+            marginRight: '100%',
+            marginBottom: '-3px',
+            borderBottom: 'none',
+          }}
         >
-          Create User 
-        </button>
-      </main>
-
-      <ul style={{ color: 'white' }}>
-        {
-            getUsers.Message.map((user) => (
-                <li key={user.id} >
-                  {user.id} - {user.username} - {user.email} - {user.password}
-                  <button onClick={() => handleNavigation('/update-user')}>Edit</button>
-                  <button onClick={() => handleNavigation('/delete-user')}>Delete</button>
-                </li>
-              ))
-        }
-      </ul> 
-
-    </div> 
-  );
+          &#8249;
+        </Link>
+        <header className="home-main-title">Users</header>
+  
+        <main className="add-workout-btn-container">
+          <button
+            onClick={() => handleNavigation('/create-user')}
+            className="add-workout-btn"
+            style={{width:  '100px', height: '30px', marginLeft:'75%', minWidth: '70px'}}
+          >
+            Create User 
+          </button>
+        </main>
+  
+        <ul style={{ color: 'white' }}>
+          {
+              getUsers.map((user) => (
+                  <li key={user.id} >
+                    {user.id} - {user.username} - {user.email} - {user.password}
+                    <button onClick={() => handleNavigation('/update-user')}>Edit</button>
+                    <button onClick={() => handleNavigation('/delete-user')}>Delete</button>
+                  </li>
+                ))
+          }
+        </ul> 
+  
+      </div> 
+    );
+  }
 };
 
 export default MenuAdmin;

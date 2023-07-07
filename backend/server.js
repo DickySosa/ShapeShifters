@@ -91,7 +91,7 @@ app.get('/get-all-users', async (req,res) => {
 
   try {
     const allUsers = await usersCrud.getAllUsers(client)
-    res.status(200).json({ Message: allUsers.rows })
+    res.status(200).json(allUsers.rows)
   } catch (error) {
     res.status(500).json({ error: err.code });
   }
