@@ -1,79 +1,116 @@
-import React, {useState,useEffect} from 'react';
-import '../styles/home.css';
+import React, { useState, useEffect } from 'react';
+import '../styles/menuAdmin.css';
 import { useNavigate, Link } from 'react-router-dom';
 
 const MenuAdmin = () => {
   const navigate = useNavigate();
 
-  const  [getUsers, setGetUsers] = useState([])
+  const [getUsers, setGetUsers] = useState([])
 
   const handleNavigation = (path) => {
     navigate(path);
   };
 
-  useEffect (() => {
+  useEffect(() => {
 
     const fetchAllUsers = async () => {
-        
-        try {
-            const data = await fetch('http://localhost:9000/get-all-users',{
-                method: 'GET'
-            })
-            const allUsers = await data.json();
-            console.log('user ',  allUsers)
-            setGetUsers(allUsers)
 
-        } catch (error) {
-            console.error('Error obtaining the information', error);
-        }
+      try {
+        const data = await fetch('http://localhost:9000/get-all-users', {
+          method: 'GET'
+        })
+        const allUsers = await data.json();
+        console.log('user ', allUsers)
+        setGetUsers(allUsers)
+
+      } catch (error) {
+        console.error('Error obtaining the information', error);
+      }
 
     }
     fetchAllUsers();
   }, [])
-  
 
-  if(getUsers){
+ const handleDelete = async (userId) => {
+  try {
+    
+  } catch (error) {
+    
+  }
+ }
+
+  if (getUsers) {
     return (
-      <div className="home">
-          <Link
-          className="back-btn"
-          to={'/home'}
-          style={{
-            display: 'inline-block',
-            marginRight: '100%',
-            marginBottom: '-3px',
-            borderBottom: 'none',
-          }}
-        >
-          &#8249;
-        </Link>
-        <header className="home-main-title">Users</header>
-  
-        <main className="add-workout-btn-container">
-          <button
-            onClick={() => handleNavigation('/create-user')}
-            className="add-workout-btn"
-            style={{width:  '100px', height: '30px', marginLeft:'75%', minWidth: '70px'}}
-          >
-            Create User 
-          </button>
+      <div className="menu-admin">
+
+        <header className="menu-admin-header">
+          <div className='menu-admin-header-grid-container'>
+            <button className="back-btn"
+              onClick={() => handleNavigation('/home')}
+            >
+              &#8249;
+            </button>
+            <h3 className='title-h3'>Users</h3>
+
+          </div>
+        </header>
+
+        <main className='main-layout'>
+          <section className='main-buttons-container'>
+            <button
+              onClick={() => handleNavigation('/create-user')}
+              className="create-user-button"
+            >
+              + Create User
+            </button>
+
+            <button
+              onClick={() => handleNavigation('/create-user')}
+              className="search-user-button"
+            >
+              Search user by Id
+            </button>
+          </section>
+
+
+
+          <section className='tables-layout'>
+            <table>
+              <thead>
+                <tr>
+                  <td>Id</td>
+                  <td>Username</td>
+                  <td>Email</td>
+                  <td>Password</td>
+                  <td>Options</td>
+                </tr>
+              </thead>
+              <tbody>
+                {getUsers.map((user) => (
+                  <tr key={user.id} >
+                    <td>{user.id}</td>
+                    <td>{user.username}</td>
+                    <td>{user.email}</td>
+                    <td>{user.password}</td>
+                    <td>
+                      <button
+                        className='edit-btn'
+                        onClick={() => handleNavigation('/update-user')}>Edit</button>
+                      <button
+                        className='dlt-btn'
+                        onClick={() => handleDelete(user.id)}>Delete</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
+
         </main>
-  
-        <ul style={{ color: 'white' }}>
-          {
-              getUsers.map((user) => (
-                  <li key={user.id} >
-                    {user.id} - {user.username} - {user.email} - {user.password}
-                    <button onClick={() => handleNavigation('/update-user')}>Edit</button>
-                    <button onClick={() => handleNavigation('/delete-user')}>Delete</button>
-                  </li>
-                ))
-          }
-        </ul> 
-  
-      </div> 
+
+      </div>
     );
   }
-};
+}
 
 export default MenuAdmin;
