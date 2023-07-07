@@ -17,7 +17,6 @@ import ForgotPassword from './components/ForgotPassword';
 // import Admin menu
 import MenuAdmin from './admin/MenuAdmin'
 import CreateUser from './admin/CreateUser'
-import GetAllUsers from './admin/GetAllUsers'
 import GetUserById from './admin/GetUserById'
 import UpdateUser from './admin/UpdateUser'
 import DeleteUser from './admin/DeleteUser'
@@ -47,10 +46,9 @@ function App() {
             {/* Admin menu */}
             <Route path="/menu-admin" element={<MenuAdmin />} />
             <Route path="/create-user" element={<CreateUser />} />
-            {/* <Route path="/get-all-users" element={<GetAllUsers />} />
-            <Route path="/get-user-by-id" element={<GetUserById />} />
+            {/* <Route path="/get-user-by-id" element={<GetUserById />} /> */}
             <Route path="/update-user" element={<UpdateUser />} />
-            <Route path="/delete-user" element={<DeleteUser />} /> */}
+            <Route path="/delete-user" element={<DeleteUser />} /> 
           </Routes>
         </MyContext.Provider>
       </Router>

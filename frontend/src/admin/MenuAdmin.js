@@ -44,7 +44,7 @@ const MenuAdmin = () => {
         //     </li>
         //   ))
     
-  console.log(getUsers.Message[0].id)
+  
 
   return (
     <div className="home">
@@ -77,6 +77,8 @@ const MenuAdmin = () => {
             getUsers.Message.map((user) => (
                 <li key={user.id} >
                   {user.id} - {user.username} - {user.email} - {user.password}
+                  <button onClick={() => handleNavigation('/update-user')}>Edit</button>
+                  <button onClick={() => handleNavigation('/delete-user')}>Delete</button>
                 </li>
               ))
         }
