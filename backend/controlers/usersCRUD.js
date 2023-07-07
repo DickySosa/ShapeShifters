@@ -1,6 +1,6 @@
 const TABLE_NAME = 'users_data';
 
-const createUserFromAdmin = (client, username, email, password) => {
+const createUserFromAdmin = (client, createNewUser) => {
     const {username, email, password} = createNewUser
     const registerQuery = {
         text: `INSERT INTO ${TABLE_NAME} (username, email, password) VALUES ($1, $2, $3)`,

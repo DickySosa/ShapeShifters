@@ -87,8 +87,14 @@ app.post('/create-new-user', async (req, res) => {
   }
 });
 
-app.get('/get-all-users',(req,res) => {
+app.get('/get-all-users', async (req,res) => {
 
+  try {
+    const allUsers = await usersCrud.getAllUsers(client)
+    res.status(200).json({ Message: allUsers.rows })
+  } catch (error) {
+    res.status(500).json({ error: err.code });
+  }
 })
 
 app.get('/get-by-id',(req,res) => {

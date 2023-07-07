@@ -81,6 +81,7 @@ const initialForm = {
         style={{
           display: 'inline-block',
           marginRight: '100%',
+          marginBottom: '-5px',
           borderBottom: 'none',
         }}
       >
