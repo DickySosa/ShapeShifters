@@ -110,6 +110,12 @@ app.put('/update-user', async (req,res) => {
  }
 })
 
-app.delete('/delete-user',(req,res) => {
-  
+app.delete(`/delete-user/:userId`, async (req,res) => {
+  const userId = req.params.userId
+  try {
+    await usersCrud.deleteUser(client,userId)
+    res.status(200).json('User deleted successfully')
+  } catch (error) {
+    res.status(500).json('Something  went wrong ' + error)
+  }
 })

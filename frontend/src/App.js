@@ -19,7 +19,6 @@ import MenuAdmin from './admin/MenuAdmin'
 import CreateUser from './admin/CreateUser'
 import GetUserById from './admin/GetUserById'
 import UpdateUser from './admin/UpdateUser'
-import DeleteUser from './admin/DeleteUser'
 // context API
 import { MyContext } from './MyContext';
 
@@ -48,7 +47,6 @@ function App() {
             <Route path="/create-user" element={<CreateUser />} />
             {/* <Route path="/get-user-by-id" element={<GetUserById />} /> */}
             <Route path="/update-user" element={<UpdateUser />} />
-            <Route path="/delete-user" element={<DeleteUser />} /> 
           </Routes>
         </MyContext.Provider>
       </Router>

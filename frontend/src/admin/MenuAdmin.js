@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/menuAdmin.css';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const MenuAdmin = () => {
   const navigate = useNavigate();
 
   const [getUsers, setGetUsers] = useState([])
+  const [deleteUserId, setDeleteUserId] = useState(null);
 
   const handleNavigation = (path) => {
     navigate(path);
   };
 
+  /* Fetch all users*/
   useEffect(() => {
 
     const fetchAllUsers = async () => {
@@ -31,13 +33,20 @@ const MenuAdmin = () => {
     fetchAllUsers();
   }, [])
 
- const handleDelete = async (userId) => {
-  try {
-    
-  } catch (error) {
-    
+  /*Delete user using Id as parameter */
+  
+  const handleDelete = async (userId) => {
+    try {
+      const deleteFetch = await fetch(`http://localhost:9000/delete-user/${userId}`, {
+        method: 'DELETE'
+      })
+      const deleteResponse = await deleteFetch.json();
+      alert(deleteResponse)
+      window.location.reload();
+    } catch (error) {
+      alert('Error deleting user')
+    }
   }
- }
 
   if (getUsers) {
     return (
