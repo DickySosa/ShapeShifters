@@ -97,12 +97,8 @@ app.get('/get-all-users', async (req, res) => {
   }
 });
 
-
-
-
 app.get(`/get-by-id/:userId`, async (req, res) => {
   const userId = req.params.userId
-  console.log('User Id is -------------->', userId)
   try {
     const response = await usersCrud.getUserById(client, userId )
     const respData = await response;
@@ -114,15 +110,13 @@ app.get(`/get-by-id/:userId`, async (req, res) => {
   }
 });
 
+/*********HERE**********/
 
-
-
-
-
-
-app.put('/update-user', async (req, res) => {
+app.put('/update-user/:userID', async (req, res) => {
+  const userId = req.params.userId
+  console.log('User Id is -------------->', userId)
   try {
-    await usersCrud.updateUser(client, req.body)
+    await usersCrud.updateUser(client, userId)
     res.status(200).json({ message: 'OK' })
   } catch (error) {
     res.status(500).json({ error: 'DAMN' }); ///********************** check out this later */

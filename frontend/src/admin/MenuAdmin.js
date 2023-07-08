@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../adminStyles/menuAdmin.css';
 import { useNavigate } from 'react-router-dom';
+import UpdateUser from './UpdateUser';
 
 const MenuAdmin = () => {
   const navigate = useNavigate();
@@ -103,7 +104,7 @@ const MenuAdmin = () => {
                     <td>
                       <button
                         className='edit-btn'
-                        onClick={() => handleNavigation('/update-user')}>Edit</button>
+                        onClick={() => handleNavigation(`/update-user/${user.id}`)}>Edit</button>
                       <button
                         className='dlt-btn'
                         onClick={() => handleDelete(user.id)}>Delete</button>
