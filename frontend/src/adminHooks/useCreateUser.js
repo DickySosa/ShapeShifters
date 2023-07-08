@@ -1,14 +1,11 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
-
-const useRegister = (initialForm, validateForm) => {
+const useCreateUser = (initialForm, validateForm) => {
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
   const [serverError, setServerError] = useState(null);
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -73,4 +70,4 @@ const useRegister = (initialForm, validateForm) => {
   };
 };
 
-export default useRegister;
+export default useCreateUser;

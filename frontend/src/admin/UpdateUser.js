@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/register.css';
-import useCreateUser from '../hooks/useCreateUser';
+import useCreateUser from '../adminHooks/useCreateUser';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { Link } from 'react-router-dom';
@@ -54,7 +54,7 @@ const initialForm = {
     return errors;
   };
   
-  const CreateUser = () => {
+  const UpdateUser = () => {
     const {
       form,
       errors,
@@ -158,4 +158,4 @@ const initialForm = {
     );
   };
   
-  export default CreateUser;
+  export default UpdateUser;

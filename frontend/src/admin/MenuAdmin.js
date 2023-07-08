@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/menuAdmin.css';
+import '../adminStyles/menuAdmin.css';
 import { useNavigate } from 'react-router-dom';
 
 const MenuAdmin = () => {
   const navigate = useNavigate();
 
   const [getUsers, setGetUsers] = useState([])
-  const [deleteUserId, setDeleteUserId] = useState(null);
 
   const handleNavigation = (path) => {
     navigate(path);
@@ -34,7 +33,7 @@ const MenuAdmin = () => {
   }, [])
 
   /*Delete user using Id as parameter */
-  
+
   const handleDelete = async (userId) => {
     try {
       const deleteFetch = await fetch(`http://localhost:9000/delete-user/${userId}`, {
@@ -74,7 +73,7 @@ const MenuAdmin = () => {
             </button>
 
             <button
-              onClick={() => handleNavigation('/create-user')}
+              onClick={() => handleNavigation('/get-user-by-id')}
               className="search-user-button"
             >
               Search user by Id

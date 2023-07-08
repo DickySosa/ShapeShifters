@@ -45,7 +45,7 @@ function App() {
             {/* Admin menu */}
             <Route path="/menu-admin" element={<MenuAdmin />} />
             <Route path="/create-user" element={<CreateUser />} />
-            {/* <Route path="/get-user-by-id" element={<GetUserById />} /> */}
+            <Route path="/get-user-by-id" element={<GetUserById />} />
             <Route path="/update-user" element={<UpdateUser />} />
           </Routes>
         </MyContext.Provider>

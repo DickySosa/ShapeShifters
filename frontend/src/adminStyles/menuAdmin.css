@@ -67,12 +67,12 @@
     border-radius: 10px;
     background: #3a87f3;
     border: 1px solid #FFFFFF;
-    width: 130px;
+    width: 120px;
     height: 30px;
     color: color;
     min-Width: 70px;
     cursor: pointer;
-    margin-left: 65%;
+    margin-left: 60%;
 }
 
 /*tables layout*/

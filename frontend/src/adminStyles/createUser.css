@@ -1,0 +1,93 @@
+.create-user-layout {
+    text-align: center;
+    color: white;
+    background-color: #252525;
+    /* padding: auto; */
+    margin: 1rem; /*dt*/
+    border-radius: 26px;
+    min-width: 670px;
+    max-width: auto;
+    height: auto;
+}
+
+/*Header layout*/
+.create-user-header {
+    color: white;
+    font-family: 'Inter';
+    font-size: 25px;
+    border-bottom: 1px solid white;
+    width: 100%;
+}
+.create-user-header-grid-container{
+    display: grid;
+    grid-template-areas:
+    'back-btn  title';
+    margin-bottom: -1rem;
+}
+
+.back-btn{
+    grid-area: back-btn;
+    margin: 10px;
+    width: 10px;
+    height: 40px;
+}
+.create-user-title{
+    grid-area: title;
+    align-items: center;
+    width: 150px;
+}
+
+/*Main layout*/
+.main-layout{
+    margin: 1rem;
+}
+
+.create-user-button {
+    grid-area: create-btn;
+    border-radius: 10px;
+    background: rgba(46, 204, 113, 1);
+    border: 1px solid #FFFFFF;
+    width: 150px;
+    height: 30px;
+    color: black;
+    min-Width: 70px;
+    cursor: pointer;
+    margin-left: 100%;
+}
+
+/* Table buttons*/
+
+.submit-btn {
+    background-color: rgba(46, 204, 113, 1);
+    border: none;
+    border-radius: 29px;
+    width: 65%;
+    min-width: 150px;
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+    height: 45px;
+}
+
+.register-input-fields {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid rgba(169, 165, 165, 1);
+    background-color: rgba(0, 0, 0, 0);
+    width: 65%;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+span {
+    color: red;
+    display: flex;
+    margin-left: 17%;
+    margin-top: -2rem;
+    margin-bottom: 1rem;
+
+}
+
+.success-mesagge {
+    color: rgba(46, 204, 113, 1);
+}
