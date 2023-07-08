@@ -50,12 +50,15 @@ const GetUserById = () => {
             console.log('This data.message ---------------------->', data.message[0])
             setUserRcbd(data.message)
 
-            if(data.length > 0){
-                return console.log('Siiiiiiiii')
+            if(data.message.length > 0){
+                setResponse(true)
+                setServerError('User exist in Database')
+            } else {
+            setServerError('User does not exist in Database')
             }
         } catch (error) {
             console.log('Error: ', error)
-
+            
         }
 
     }
@@ -106,7 +109,7 @@ const GetUserById = () => {
                     style={{ marginBottom: '3rem' }}
                 />
 
-                <section className='tables-layout'>
+                <section className='tables-layout' style={{padding: '1rem'}}>
                 <table>
               <thead>
                 <tr>
