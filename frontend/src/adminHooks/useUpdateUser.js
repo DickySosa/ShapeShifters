@@ -6,6 +6,7 @@ const useUpdateUser = (initialForm, validateForm) => {
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
   const [serverError, setServerError] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,8 +21,10 @@ const useUpdateUser = (initialForm, validateForm) => {
     setErrors(validateForm(form));
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(form)
     setErrors(validateForm(form));
 
     if (Object.keys(errors).length > 0) {
@@ -30,9 +33,9 @@ const useUpdateUser = (initialForm, validateForm) => {
 
     setLoading(true);
 
-    let userId = form.id
-
     try {
+
+  
 
         const updateReq = await fetch(`http://localhost:9000/update-user/${userId}`,{
             method: 'PUT',
@@ -49,10 +52,11 @@ const useUpdateUser = (initialForm, validateForm) => {
     } catch (error) {
         console.log('Error: ', error)
         setServerError('Something went wrong')
-    }
+    }};
 
     
-  };
+
+
 
   return {
     form,
@@ -63,6 +67,7 @@ const useUpdateUser = (initialForm, validateForm) => {
     handleBlur,
     handleSubmit,
     serverError,
+    setUserId,
   };
 };
 

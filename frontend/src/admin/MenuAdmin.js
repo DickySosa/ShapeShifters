@@ -8,8 +8,8 @@ const MenuAdmin = () => {
 
   const [getUsers, setGetUsers] = useState([])
 
-  const handleNavigation = (path) => {
-    navigate(path);
+  const handleNavigation = (path, state) => {
+    navigate(path, state);
   };
 
   /* Fetch all users*/
@@ -104,13 +104,15 @@ const MenuAdmin = () => {
                     <td>
                       <button
                         className='edit-btn'
-                        onClick={() => handleNavigation(`/update-user/${user.id}`)}>Edit</button>
+                        onClick={() => handleNavigation(`/update-user/${user.id}`, {state: {user}})}>
+                        Edit
+                      </button>
                       <button
                         className='dlt-btn'
                         onClick={() => handleDelete(user.id)}>Delete</button>
                     </td>
                   </tr>
-                ))}
+                  ))}
               </tbody>
             </table>
           </section>

@@ -112,14 +112,16 @@ app.get(`/get-by-id/:userId`, async (req, res) => {
 
 /*********HERE**********/
 
-app.put('/update-user/:userID', async (req, res) => {
-  const userId = req.params.userId
+app.put('/update-user/:userId', async (request, response) => {
+  const userId = request.params.userId
+  console.log('User Id is -------------->', request.params)
   console.log('User Id is -------------->', userId)
   try {
-    await usersCrud.updateUser(client, userId)
-    res.status(200).json({ message: 'OK' })
+    await usersCrud.updateUser(client, userId, request.body)
+    response.status(200).json({ message: 'OK' })
   } catch (error) {
-    res.status(500).json({ error: 'DAMN' }); ///********************** check out this later */
+    console.log(error)
+    response.status(500).json({ error: 'DAMN' }); ///********************** check out this later */
   }
 });
 

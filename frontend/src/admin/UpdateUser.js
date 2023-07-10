@@ -1,17 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import '../adminStyles/createUser.css';
 import useUpdateUser from '../adminHooks/useUpdateUser';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 
-const initialForm = {
-  id: ``,
-  username: '',
-  email: '',
-  password: '',
-};
+
 
 const validationsForm = (form) => {
   let errors = {};
@@ -55,6 +50,15 @@ const UpdateUser = () => {
     navigate(path);
   };
 
+  const location = useLocation();
+  const user = location.state?.user
+
+  const initialForm = {
+    username: `${user.username}`,
+    email: `${user.email}`,
+    password:`${user.password}`,
+  };
+
   const {
     form,
     errors,
@@ -64,7 +68,16 @@ const UpdateUser = () => {
     handleChange,
     handleBlur,
     handleSubmit,
+    setUserId,
   } = useUpdateUser(initialForm, validationsForm);
+
+  useEffect (() => {
+
+    console.log('trying effect, imprimir', user )
+    console.log('trying effect, imprimir user id componente', user.id)
+    setUserId(user.id)
+
+  }, [setUserId])
 
 
   return (
@@ -97,18 +110,8 @@ const UpdateUser = () => {
         </section>
       </main>
 
-      {<h3>userId:</h3>}
+      <h3> Editing userId: {user.id}</h3>
 
-      <input
-        type="number"
-        name="id"
-        placeholder="Please enter a user Id"
-        className="username-input register-input-fields"
-        onChange={handleChange}
-        onBlur={handleBlur}
-        value={form.id}
-        required
-      />
 
       {errors.id && <span>{errors.id}</span>}
 
@@ -139,7 +142,7 @@ const UpdateUser = () => {
       {errors.email && <span>{errors.email}</span>}
 
       <input
-        type="password"
+        type="text"
         name="password"
         placeholder="Password"
         className="password-input register-input-fields"

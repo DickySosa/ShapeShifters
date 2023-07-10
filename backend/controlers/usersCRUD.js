@@ -29,16 +29,16 @@ const getUserById = (client, id) => {
 
 
 
-const updateUser = (client, existingUser) => {
-    const { id, username, email, password } = existingUser
+const updateUser = (client, userId,  existingUser) => {
+    const {username, email, password } = existingUser
     const updateUserQuery = {
         text:
             `UPDATE ${TABLE_NAME} 
         SET
-        username = ${username},
-        email = ${email},
-        password =  ${password}
-        WHERE id = ${id}`
+        username = '${username}',
+        email = '${email}',
+        password =  '${password}'
+        WHERE ID = ${userId}`
     }
     console.log(updateUserQuery)
     return client.query(updateUserQuery)
