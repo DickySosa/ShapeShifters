@@ -13,7 +13,7 @@ const GetUserById = () => {
         navigate(path);
     };
 
-    const [userId, setUserId] = useState();
+    const [userId, setUserId] = useState('');
 
     const [userRcbd, setUserRcbd] = useState([])
     const [loading, setLoading] = useState(false)
