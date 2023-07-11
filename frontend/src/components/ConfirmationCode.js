@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef} from 'react';
 import '../styles/confirmationCode.css';
 import useConfirmationCode from '../hooks/useConfirmationCode';
 import { Link } from 'react-router-dom';
@@ -6,8 +6,6 @@ import Loader from './Loader';
 import Message from './Message';
 
 const ConfirmationCode = () => {
-  const [disabled,setDisabled] = useState(false)
-
   const initialForm = {
     verificationCodeOne: '',
     verificationCodeTwo: '',
