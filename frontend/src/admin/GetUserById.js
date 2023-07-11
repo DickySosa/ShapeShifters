@@ -13,9 +13,7 @@ const GetUserById = () => {
         navigate(path);
     };
 
-    const [form, setForm] = useState({
-        id: '',
-    });
+    const [userId, setUserId] = useState();
 
     const [userRcbd, setUserRcbd] = useState([])
     const [loading, setLoading] = useState(false)
@@ -23,19 +21,18 @@ const GetUserById = () => {
     const [response, setResponse] = useState([])
 
     const handleChange = (event) => {
-        const newValue = event.target.value;
-        setForm(newValue);
+        const value = event.target.value;
+        setUserId(value);
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(form);
+        console.log(userId);
         setLoading(true)
-        if (form.trim() === '') {
+        if (userId.trim() === '') {
             console.log('ID is required');
             return;
         }
-        let userId = form;
         try {
             const response = await fetch(`http://localhost:9000/get-by-id/${userId}`, {
                 method: 'GET'
@@ -104,7 +101,7 @@ const GetUserById = () => {
                     placeholder="Please enter any Id"
                     className="username-input register-input-fields"
                     onChange={handleChange}
-                    value={form}
+                    value={userId}
                     required
                     style={{ marginBottom: '3rem' }}
                 />
