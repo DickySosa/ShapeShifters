@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../adminStyles/menuAdmin.css';
 import { useNavigate } from 'react-router-dom';
-import UpdateUser from './UpdateUser';
 
 const MenuAdmin = () => {
   const navigate = useNavigate();

@@ -53,11 +53,12 @@ const UpdateUser = () => {
   const location = useLocation();
   const user = location.state?.user
 
-  const initialForm = {
-    username: `${user.username}`,
-    email: `${user.email}`,
-    password:`${user.password}`,
-  };
+  const initialForm = {... user}
+  // const initialForm = {
+  //   username: `${user.username}`,
+  //   email: `${user.email}`,
+  //   password:`${user.password}`,
+  // };
 
   const {
     form,

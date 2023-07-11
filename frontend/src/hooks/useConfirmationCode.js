@@ -1,11 +1,12 @@
 import {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const useConfirmationCode = (initialForm, validateForm) => {
+const useConfirmationCode = (initialForm) => {
   const [form, setForm] = useState(initialForm)
   const [errors, setErrors] = useState({})
   const [loading, setLoading] = useState(false)
   const [response, setResponse] = useState(null)
+  const [serverError, setServerError] = useState(null)
   const navigate = useNavigate();
 
   const handleChange= (e) => {
@@ -16,25 +17,21 @@ const useConfirmationCode = (initialForm, validateForm) => {
     })
   }
 
-  const handleBlur= (e) => {
-    handleChange(e);
-    setErrors(validateForm(form));
-  }
+  // const handleBlur= (e) => {
+  //   handleChange(e);
+  //   setErrors(validateForm(form));
+  // }
 
   const handleSubmit= (e) => {
     e.preventDefault()
-    setErrors(validateForm(form));
 
-    if(Object.keys(errors).length > 0){
-        return
-    }
     console.log(form)
         setLoading(true)
-        navigate('/user-profile')
+        // navigate('/user-profile')
   }
 
   return{
-    form, errors,loading,response, handleChange,handleBlur,handleSubmit
+    form, errors,loading,response, handleChange,handleSubmit, serverError
   }
 }
 
