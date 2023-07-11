@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 
 const useConfirmationCode = (initialForm) => {
   const [form, setForm] = useState(initialForm)
-  const [errors, setErrors] = useState({})
   const [loading, setLoading] = useState(false)
   const [response, setResponse] = useState(null)
   const [serverError, setServerError] = useState(null)
@@ -17,21 +16,16 @@ const useConfirmationCode = (initialForm) => {
     })
   }
 
-  // const handleBlur= (e) => {
-  //   handleChange(e);
-  //   setErrors(validateForm(form));
-  // }
-
   const handleSubmit= (e) => {
     e.preventDefault()
 
     console.log(form)
         setLoading(true)
-        // navigate('/user-profile')
+        // navigate('/user-profile')   /**  fix this */
   }
 
   return{
-    form, errors,loading,response, handleChange,handleSubmit, serverError
+    form,loading,response, handleChange,handleSubmit, serverError
   }
 }
 

@@ -4,37 +4,11 @@ import useSignIn from '../hooks/useSignIn';
 import Loader from './Loader';
 import Message from './Message';
 import { useNavigate } from 'react-router-dom';
+import { validationsFormSignIn } from '../helper/validationFunction'
 
 const initialForm = {
   username: '',
   password: '',
-};
-const validationsForm = (form) => {
-  let errors = {};
-  let regexUsername = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]{6,}$/;
-  let regexPassword =
-    /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/;
-
-  if (!form.username.trim()) {
-    errors.username = "'Username' is required";
-  } else if (form.username.length < 6) {
-    errors.username = 'The Username should have at least 6 characters';
-  } else if (!regexUsername.test(form.username.trim())) {
-    errors.username = 'The Username just accept letters and blank spaces';
-  }
-
-  if (!form.password.trim()) {
-    errors.password = "'Password' is required";
-  } else if (form.password.length < 8) {
-    errors.password = 'The password should have at least 8 characters';
-  } else if (!regexPassword.test(form.password.trim())) {
-    errors.password =
-      'Password should have lower, upper case, numbers and special charecters';
-  } else if (form.password.length > 16) {
-    errors.password = 'Password is no more than 16 characters long';
-  }
-
-  return errors;
 };
 
 const SignIn = () => {
@@ -51,7 +25,7 @@ const SignIn = () => {
     handleBlur,
     handleSubmit,
     serverError,
-  } = useSignIn(initialForm, validationsForm);
+  } = useSignIn(initialForm, validationsFormSignIn);
 
   const handleDisabled = () => {
     return !form.username || !form.password;

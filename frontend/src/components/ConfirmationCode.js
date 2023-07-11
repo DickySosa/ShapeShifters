@@ -15,7 +15,6 @@ const ConfirmationCode = () => {
 
   const {
     form,
-    errors,
     loading,
     response,
     handleChange,
@@ -68,7 +67,6 @@ const ConfirmationCode = () => {
             name='verificationCodeOne'
             placeholder='-'
             maxLength='1'
-            className={errors.verificationCodeOne && 'invalid'}
             onChange={(e) => handleCodeChange(e, 'verificationCodeOne', 'verificationCodeTwo')}
             value={form.verificationCodeOne}
             ref={inputRefs.verificationCodeOne}
@@ -79,7 +77,6 @@ const ConfirmationCode = () => {
             name='verificationCodeTwo'
             placeholder='-'
             maxLength='1'
-            className={errors.verificationCodeTwo && 'invalid'}
             onChange={(e) => handleCodeChange(e, 'verificationCodeTwo', 'verificationCodeThree')}
             value={form.verificationCodeTwo}
             ref={inputRefs.verificationCodeTwo}
@@ -90,7 +87,6 @@ const ConfirmationCode = () => {
             name='verificationCodeThree'
             placeholder='-'
             maxLength='1'
-            className={errors.verificationCodeThree && 'invalid'}
             onChange={(e) => handleCodeChange(e, 'verificationCodeThree', 'verificationCodeFour')}
             value={form.verificationCodeThree}
             ref={inputRefs.verificationCodeThree}
@@ -101,7 +97,6 @@ const ConfirmationCode = () => {
             name='verificationCodeFour'
             placeholder='-'
             maxLength='1'
-            className={errors.verificationCodeFour && 'invalid'}
             onChange={(e) => handleCodeChange(e, 'verificationCodeFour', null)}
             value={form.verificationCodeFour}
             ref={inputRefs.verificationCodeFour}
