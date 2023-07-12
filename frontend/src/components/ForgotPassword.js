@@ -4,13 +4,11 @@ import useForgotPassword from '../hooks/useForgotPassword';
 import { Link } from 'react-router-dom';
 import Loader from './Loader';
 import Message from './Message';
-import { validationEmail } from '../helper/validationFunction'
+import { formValidations } from '../helper/validationFunction'
 
 
 const initialForm = {
-  emailVerification: '',
-  password: '',
-  confirmPassword: '',
+  email: '',
 };
 
 
@@ -24,10 +22,10 @@ const ForgotPassword = () => {
     handleChange,
     handleBlur,
     handleSubmit,
-  } = useForgotPassword(initialForm, validationEmail);
+  } = useForgotPassword(initialForm, formValidations);
 
   const handleDisabled = () => {
-    return !form.emailVerification 
+    return !form.email 
   };
 
   return (
@@ -51,16 +49,16 @@ const ForgotPassword = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          name="emailVerification"
+          name="email"
           placeholder="E-mail address"
           className="username-input register-input-fields"
           onChange={handleChange}
           onBlur={handleBlur}
-          value={form.emailVerification}
+          value={form.email}
           required
         />
 
-        {errors.emailVerification && <span>{errors.emailVerification}</span>}
+        {errors.email && <span>{errors.email}</span>}
 
         <br/>
       {loading && <Loader/>}

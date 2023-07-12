@@ -41,11 +41,20 @@ const MenuAdmin = () => {
       })
       const deleteResponse = await deleteFetch.json();
       alert(deleteResponse)
-      window.location.reload();
+      // obtener lista
+      const allUsers = getUsers
+      //filtra la lista con el userId
+      const filterList = allUsers.filter( (user)=>{
+        return user.id !== userId
+      })
+      //setear la nueva lista filtrada
+      setGetUsers(filterList)
+
     } catch (error) {
       alert('Error deleting user')
     }
   }
+
 
   if (getUsers) {
     return (

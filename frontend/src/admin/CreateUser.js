@@ -4,7 +4,7 @@ import useCreateUser from '../adminHooks/useCreateUser';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { useNavigate } from 'react-router-dom'
-import { validationsForm } from '../helper/validationFunction'
+import { formValidations } from '../helper/validationFunction'
 
 
 const initialForm = {
@@ -24,7 +24,7 @@ const CreateUser = () => {
     handleChange,
     handleBlur,
     handleSubmit,
-  } = useCreateUser(initialForm, validationsForm);
+  } = useCreateUser(initialForm, formValidations);
 
 
   const navigate = useNavigate();

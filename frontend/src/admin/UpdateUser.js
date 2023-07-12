@@ -4,7 +4,7 @@ import useUpdateUser from '../adminHooks/useUpdateUser';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { validationsFormUpdate } from '../helper/validationFunction'
+import { formValidations } from '../helper/validationFunction'
 
 
 
@@ -29,7 +29,7 @@ const UpdateUser = () => {
     handleBlur,
     handleSubmit,
     setUserId,
-  } = useUpdateUser(initialForm, validationsFormUpdate);
+  } = useUpdateUser(initialForm, formValidations);
 
   useEffect (() => {
 
