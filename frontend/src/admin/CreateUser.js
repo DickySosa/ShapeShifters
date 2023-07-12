@@ -1,9 +1,11 @@
 import React from 'react';
-import '../styles/register.css';
-import useRegister from '../hooks/useRegister';
-import Loader from './Loader';
-import Message from './Message';
+import '../adminStyles/createUser.css';
+import useCreateUser from '../adminHooks/useCreateUser';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
+import { useNavigate } from 'react-router-dom'
 import { validationsForm } from '../helper/validationFunction'
+
 
 const initialForm = {
   username: '',
@@ -12,7 +14,7 @@ const initialForm = {
   confirmPassword: '',
 };
 
-const Register = () => {
+const CreateUser = () => {
   const {
     form,
     errors,
@@ -22,16 +24,45 @@ const Register = () => {
     handleChange,
     handleBlur,
     handleSubmit,
-  } = useRegister(initialForm, validationsForm);
+  } = useCreateUser(initialForm, validationsForm);
 
-  const handleDisabled = () => {
-    return (
-      !form.username || !form.email || !form.password || !form.confirmPassword
-    );
+
+  const navigate = useNavigate();
+  const handleNavigation = (path) => {
+    navigate(path);
   };
 
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='create-user-layout'>
+
+      <header className="create-user-header">
+        <div className='create-user-header-grid-container'>
+          <button className="back-btn"
+            onClick={() => handleNavigation('/menu-admin')}
+          >
+            &#8249;
+          </button>
+          <h3 className='create-user-title'>Create User</h3>
+
+        </div>
+      </header>
+
+      <main className='main-layout'>
+
+        <section className='main-buttons-container'>
+          <button
+            type="submit"
+            value="SIGN IN"
+            className="create-user-button"
+          >
+           + Create new user
+          </button>
+
+        </section>
+      </main>
+
+
       <input
         type="text"
         name="username"
@@ -84,21 +115,14 @@ const Register = () => {
 
       {errors.confirmPassword && <span>{errors.confirmPassword}</span>}
 
-      <br/>
-      {loading && <Loader/>}
+      <br />
+      {loading && <Loader />}
       {response && <Message msg={`${serverError}`} bgColor="dc3545" />}
-      <br/>
+      <br />
 
-      <button
-        type="submit"
-        value="SIGN IN"
-        className="submit-btn"
-        disabled={handleDisabled()}
-      >
-        REGISTER
-      </button> 
+
     </form>
   );
 };
 
-export default Register;
+export default CreateUser;
