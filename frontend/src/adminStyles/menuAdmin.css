@@ -1,0 +1,106 @@
+.menu-admin {
+    text-align: center;
+    color: white;
+    background-color: #252525;
+    /* padding: auto; */
+    margin: 1rem; /*dt*/
+    border-radius: 26px;
+    min-width: 670px;
+    max-width: auto;
+    height: auto;
+}
+
+/*Header layout*/
+.menu-admin-header {
+    color: white;
+    font-family: 'Inter';
+    font-size: 25px;
+    border-bottom: 1px solid white;
+    width: 100%;
+}
+.menu-admin-header-grid-container{
+    display: grid;
+    grid-template-areas:
+    'back-btn  title';
+    margin-bottom: -1rem;
+}
+
+.back-btn{
+    grid-area: back-btn;
+    margin: 10px;
+    width: 10px;
+    height: 40px;
+}
+.title-h3{
+    grid-area: title;
+    align-items: center;
+    width: 70px;
+}
+
+/*Main layout*/
+.main-layout{
+    margin: 1rem;
+}
+
+.main-buttons-container{
+    display: grid;
+    grid-template-areas:
+    'create-btn  search-btn';
+    align-items: right;
+    margin-bottom: 0.5rem;
+}
+
+.create-user-button {
+    grid-area: create-btn;
+    border-radius: 10px;
+    background: rgba(46, 204, 113, 1);
+    border: 1px solid #FFFFFF;
+    width: 100px;
+    height: 30px;
+    color: black;
+    min-Width: 70px;
+    cursor: pointer;
+    margin-left: 130%;
+}
+.search-user-button {
+    grid-area: search-btn;
+    border-radius: 10px;
+    background: #3a87f3;
+    border: 1px solid #FFFFFF;
+    width: 120px;
+    height: 30px;
+    color: color;
+    min-Width: 70px;
+    cursor: pointer;
+    margin-left: 60%;
+}
+
+/*tables layout*/
+
+.tables-layout{
+    width: 100%;
+    display: flex;
+}
+.tables-layout table{
+    flex-grow: 1;
+    margin-bottom: 1rem;
+}
+
+ td {
+    border: 1px solid white;
+ }
+
+
+/* Table buttons*/
+
+.edit-btn{
+    background-color: #3a87f3;
+    color: white;
+    border: 1px solid white;
+    margin-right: 3px;
+}
+.dlt-btn{
+    background-color: rgb(255, 3, 3);
+    color: white;
+    border: 1px solid white;
+}

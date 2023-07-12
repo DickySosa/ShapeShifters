@@ -14,6 +14,11 @@ import AddWorkout from './components/AddWorkout';
 import AddExercise from './components/AddExercise';
 import AddSet from './components/AddSet';
 import ForgotPassword from './components/ForgotPassword';
+// import Admin menu
+import MenuAdmin from './admin/MenuAdmin'
+import CreateUser from './admin/CreateUser'
+import GetUserById from './admin/GetUserById'
+import UpdateUser from './admin/UpdateUser'
 // context API
 import { MyContext } from './MyContext';
 
@@ -37,6 +42,11 @@ function App() {
             <Route path="/add-workout" element={<AddWorkout />} />
             <Route path="/add-exercise" element={<AddExercise />} />
             <Route path="/add-set" element={<AddSet />} />
+            {/* Admin menu */}
+            <Route path="/menu-admin" element={<MenuAdmin />} />
+            <Route path="/create-user" element={<CreateUser />} />
+            <Route path="/get-user-by-id" element={<GetUserById />} />
+            <Route path="/update-user/:userId" element={<UpdateUser />} />
           </Routes>
         </MyContext.Provider>
       </Router>

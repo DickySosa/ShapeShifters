@@ -1,130 +1,124 @@
-import React from 'react'
+import React, { useRef} from 'react';
 import '../styles/confirmationCode.css';
-import useConfirmationCode from '../hooks/useConfirmationCode'
-import { Link } from 'react-router-dom'
+import useConfirmationCode from '../hooks/useConfirmationCode';
+import { Link } from 'react-router-dom';
+import Loader from './Loader';
+import Message from './Message';
 
-const initialForm = {
-  verificationCodeOne: '',
-  verificationCodeTwo: '',
-  verificationCodeThree: '',
-  verificationCodeFour: '',
-}
-const validationsForm = (form) =>{
-  let errors = {};
+const ConfirmationCode = () => {
+  const initialForm = {
+    verificationCodeOne: '',
+    verificationCodeTwo: '',
+    verificationCodeThree: '',
+    verificationCodeFour: '',
+  };
 
-  if(!form.verificationCodeOne){
-    errors.verificationCodeOne = " "
-  }
-  if(!form.verificationCodeTwo){
-    errors.verificationCodeTwo = " "
-  }
-  if(!form.verificationCodeThree){
-    errors.verificationCodeThree = " "
-  }
-  if(!form.verificationCodeFour){
-    errors.verificationCodeFour = " "
-  }
-
-  return errors
-}
-
- const ConfirmationCode = () => {
   const {
-    form, 
-    errors,
+    form,
     loading,
-    response, 
+    response,
     handleChange,
-    handleBlur,
-    handleSubmit
-  } = useConfirmationCode(initialForm, validationsForm)
+    handleSubmit,
+    serverError
+  } = useConfirmationCode(initialForm);
 
-  const handleCodeChange = (e, fieldName, nextFieldName) => {
-    const { value } = e.target;
-    handleChange(e); // Invocar la función handleChange existente
+  const inputRefs = {
+    verificationCodeOne: useRef(null),
+    verificationCodeTwo: useRef(null),
+    verificationCodeThree: useRef(null),
+    verificationCodeFour: useRef(null),
+  };
 
-    if (value.length === 1 && nextFieldName) {
-      document.getElementsByName(nextFieldName)[0].focus(); // Mover el foco al siguiente input
+  const handleCodeChange = (e, currentFieldName, nextFieldName) => {
+    const { name, value } = e.target;
+    handleChange(e);
+
+    if (value.length > 0 && nextFieldName) {
+      inputRefs[nextFieldName].current.focus(); // Mover el foco al siguiente campo
+    } else if (value.length === 0 && currentFieldName) {
+      const previousFieldName = getPreviousFieldName(currentFieldName);
+      if (previousFieldName) {
+        const previousField = inputRefs[previousFieldName].current;
+        previousField.focus(); // Mover el foco al campo anterior
+      }
     }
   };
-  
-    return (
+
+  const getPreviousFieldName = (currentFieldName) => {
+    const fieldNames = Object.keys(inputRefs);
+    const currentFieldIndex = fieldNames.indexOf(currentFieldName);
+    return fieldNames[currentFieldIndex - 1];
+  };
+
+  const handleDisabled = () => {
+    return !form.verificationCodeOne || !form.verificationCodeTwo  || !form.verificationCodeThree  || !form.verificationCodeFour
+  };
+
+  return (
     <div className='App'>
-        <Link className="back-btn" to={'/'} style={{ display: 'inline-block', marginRight: '100%' }}>&#8249;</Link>
-        <h1 className='title'>Please check your email</h1>
-        <h3 className='paragraph'>We have sent a confirmation code to the email: </h3>
+      <Link className='back-btn' to={'/'} style={{ display: 'inline-block', marginRight: '100%' }}>&#8249;</Link>
+      <h1 className='title'>Please check your email</h1>
+      <h3 className='paragraph'>We have sent a confirmation code to the email: </h3>
 
-        <form onSubmit={handleSubmit}>
-        <div className="input-group">
-
-          <input 
-          type="text" 
-          name='verificationCodeOne' 
-          placeholder="-" 
-          maxLength="1"
-          className={ errors.verificationCodeOne && 'invalid'}
-          onBlur={handleBlur}
-          onChange={(e) =>
-            handleCodeChange(e, 'verificationCodeOne', 'verificationCodeTwo')
-          }
-          value={form.verificationCodeOne}
+      <form onSubmit={handleSubmit}>
+        <div className='input-group'>
+          <input
+            type='text'
+            name='verificationCodeOne'
+            placeholder='-'
+            maxLength='1'
+            onChange={(e) => handleCodeChange(e, 'verificationCodeOne', 'verificationCodeTwo')}
+            value={form.verificationCodeOne}
+            ref={inputRefs.verificationCodeOne}
           />
 
-          <input 
-          type="text" 
-          name='verificationCodeTwo' 
-          placeholder="-" 
-          maxLength="1"
-          className={ errors.verificationCodeTwo && 'invalid'}
-          onBlur={handleBlur}
-          onChange={(e) =>
-            handleCodeChange(
-              e,
-              'verificationCodeTwo',
-              'verificationCodeThree'
-            )
-          }
-          value={form.verificationCodeTwo}
+          <input
+            type='text'
+            name='verificationCodeTwo'
+            placeholder='-'
+            maxLength='1'
+            onChange={(e) => handleCodeChange(e, 'verificationCodeTwo', 'verificationCodeThree')}
+            value={form.verificationCodeTwo}
+            ref={inputRefs.verificationCodeTwo}
           />
 
-          <input 
-          type="text" 
-          name='verificationCodeThree' 
-          placeholder="-" 
-          maxLength="1"
-          className={ errors.verificationCodeThree && 'invalid'}
-          onBlur={handleBlur}
-          onChange={(e) =>
-            handleCodeChange(
-              e,
-              'verificationCodeThree',
-              'verificationCodeFour'
-            )
-          }
-          value={form.verificationCodeThree}
+          <input
+            type='text'
+            name='verificationCodeThree'
+            placeholder='-'
+            maxLength='1'
+            onChange={(e) => handleCodeChange(e, 'verificationCodeThree', 'verificationCodeFour')}
+            value={form.verificationCodeThree}
+            ref={inputRefs.verificationCodeThree}
           />
 
-          <input 
-          type="text" 
-          name='verificationCodeFour' 
-          placeholder="-" 
-          maxLength="1"
-          className={ errors.verificationCodeFour && 'invalid'}
-          onBlur={handleBlur}
-          onChange={(e) => handleCodeChange(e, 'verificationCodeFour', null)}
-          value={form.verificationCodeFour}
+          <input
+            type='text'
+            name='verificationCodeFour'
+            placeholder='-'
+            maxLength='1'
+            onChange={(e) => handleCodeChange(e, 'verificationCodeFour', null)}
+            value={form.verificationCodeFour}
+            ref={inputRefs.verificationCodeFour}
           />
-          
         </div>
 
         <div className='resend'>RESEND CODE</div>
-            <br></br><br></br>
-        <button 
-        disabled={false}
-        type="submit" className="confirm-btn">Confirm Code</button>
-        </form>
+        <br></br>
+        {loading && <Loader/>}
+        {response && <Message msg={`${serverError}`} bgColor="dc3545" />}
+        <br></br>
+        <button
+          disabled={handleDisabled()}
+          type='submit'
+          className='confirm-btn'
+        >
+          Confirm Code
+        </button>
+      </form>
     </div>
-  )
-}
+  );
+};
 
-export default ConfirmationCode
+export default ConfirmationCode;
+

@@ -40,7 +40,18 @@ const MenuButtons = () => {
         Home
         <img 
         src='https://cdn.icon-icons.com/icons2/2248/PNG/512/home_circle_icon_137496.png' 
-        alt='settings'
+        alt='Home'
+        style={{width: '100%'}}
+        />
+     </button>
+
+     <button 
+        onClick={() => handleNavigation('/menu-admin')}
+        className="menú-buttons">
+        Admin
+        <img 
+        src='https://static.vecteezy.com/system/resources/previews/014/649/447/non_2x/outsource-manager-icon-simple-style-vector.jpg' 
+        alt='Admin'
         style={{width: '100%'}}
         />
      </button>

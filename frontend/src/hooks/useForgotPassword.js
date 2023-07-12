@@ -1,14 +1,17 @@
 import {useState} from 'react'
+import { useNavigate } from 'react-router-dom'
 // import { useNavigate } from 'react-router-dom'
 
 const useForgotPassword = (initialForm, validateForm) => {
   const [form, setForm] = useState(initialForm)
   const [errors, setErrors] = useState({})
   const [loading, setLoading] = useState(false)
+  const [serverError, setServerError] = useState('')
   const [response, setResponse] = useState(null)
-//   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleChange= (e) => {
+    
     const {name,value} = e.target;
     setForm({
         ...form,
@@ -30,7 +33,7 @@ const useForgotPassword = (initialForm, validateForm) => {
     }
     console.log(form)
         setLoading(true)
-        // navigate('/user-profile')
+        navigate('/confirmation-code')
   }
 
   return{
