@@ -17,6 +17,9 @@ const dbUsers = require('./db/users')
 
 const usersCrud = require('./controlers/usersCRUD')
 
+/* importing mailer.js */
+const transporter = require('./mailerConfig/mailer') 
+
 /** Client config to 
 * be able to connect to local database
 * @readonly This has to be created by each developer.
@@ -38,6 +41,14 @@ const user_data = `CREATE TABLE IF NOT EXISTS users_data (
     username VARCHAR(255) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
+  );`;
+
+  const verification_code = `CREATE TABLE IF NOT EXISTS verification_code (
+    id SERIAL PRIMARY KEY,
+    code VARCHAR(4) NOT NULL,
+    user_id INTEGER NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users_data(id)
   );`;
 
 app.post('/register', async (req, res) => {
