@@ -3,7 +3,7 @@ import '../styles/register.css';
 import useRegister from '../hooks/useRegister';
 import Loader from './Loader';
 import Message from './Message';
-import { validationsForm } from '../helper/validationFunction'
+import { formValidations } from '../helper/validationFunction'
 
 const initialForm = {
   username: '',
@@ -22,7 +22,7 @@ const Register = () => {
     handleChange,
     handleBlur,
     handleSubmit,
-  } = useRegister(initialForm, validationsForm);
+  } = useRegister(initialForm, formValidations);
 
   const handleDisabled = () => {
     return (

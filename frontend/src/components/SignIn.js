@@ -4,7 +4,7 @@ import useSignIn from '../hooks/useSignIn';
 import Loader from './Loader';
 import Message from './Message';
 import { useNavigate } from 'react-router-dom';
-import { validationsFormSignIn } from '../helper/validationFunction'
+import { formValidations } from '../helper/validationFunction'
 
 const initialForm = {
   username: '',
@@ -25,7 +25,7 @@ const SignIn = () => {
     handleBlur,
     handleSubmit,
     serverError,
-  } = useSignIn(initialForm, validationsFormSignIn);
+  } = useSignIn(initialForm, formValidations);
 
   const handleDisabled = () => {
     return !form.username || !form.password;
