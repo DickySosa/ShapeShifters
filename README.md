@@ -82,3 +82,25 @@ module.exports = {
     password: 'admin$123',
 };
 ```
+### Create mailer Config
+```
+- Create a file in the backend dir
+- npm install nodemailer
+
+in the file add the next exported config
+
+const transporter = nodemailer.createTransport({
+ host: host: "smtp.'REPLACE-WITH-EMAIL-DOMAIN'.com",
+  port: 465,
+  secure: true,
+  auth: {
+    // TODO: replace `user` and `pass` values from <https://forwardemail.net>
+    user: 'REPLACE-WITH-YOUR-ALIAS@YOURDOMAIN.COM',
+    pass: 'REPLACE-WITH-YOUR-GENERATED-PASSWORD'
+  }
+})
+
+module.exports = transporter;
+
+```
+
