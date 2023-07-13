@@ -18,7 +18,7 @@ const dbUsers = require('./db/users')
 const usersCrud = require('./controlers/usersCRUD')
 
 /* importing mailer.js */
-const transporter = require('./mailerConfig/mailer') 
+const mailerConfig = require('./mailerConfig/mailer') 
 
 /** Client config to 
 * be able to connect to local database
@@ -54,8 +54,13 @@ const user_data = `CREATE TABLE IF NOT EXISTS users_data (
 app.post('/register', async (req, res) => {
 
   try {
-   const newUser = await dbUsers.createUser(client, req.body)
-   console.log(newUser)
+    const verificationCode = mailerConfig.codeGenerator();
+
+    const newUser = await dbUsers.createUser(client, req.body)
+    console.log(newUser)
+
+    await mailerConfig.sendVerificationEmail(req.body.email, verificationCode);
+
     res.status(200).json({ message: 'User created successfully' })
   } catch (error) {
     console.error('Error creating user:', error);
