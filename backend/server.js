@@ -10,11 +10,9 @@ const { Client } = require('pg');
 const dbConfig = require('./dbConfig');
 
 /*db modules users.js */
-
 const dbUsers = require('./db/users')
 
 /* users CRUD */
-
 const usersCrud = require('./controlers/usersCRUD')
 
 /* importing mailer.js */
@@ -51,24 +49,31 @@ const user_data = `CREATE TABLE IF NOT EXISTS users_data (
     FOREIGN KEY (user_id) REFERENCES users_data(id)
   );`;
 
+  /*REGISTER*/
 app.post('/register', async (req, res) => {
 
   try {
     const verificationCode = mailerConfig.codeGenerator();
 
     const newUser = await dbUsers.createUser(client, req.body)
-    console.log(newUser)
+    // console.log('req------>', req)
+    // console.log('req.body------>', req.body)
+    // console.log( 'try new user ----->', newUser)
+    // console.log( 'try new user  rows ----->', newUser.rows)    *****whatch this tomorrow
 
     await mailerConfig.sendVerificationEmail(req.body.email, verificationCode);
 
-    res.status(200).json({ message: 'User created successfully' })
+    // await mailerConfig.insertVerificationCodeForeignKey(client,newUser.id, verificationCode)
+
+    res.status(200).json({ message: 'User created successfully ' + 'new user ------> ', newUser })
   } catch (error) {
     console.error('Error creating user:', error);
     res.status(500).json({ RegistingErrors: error.code });
   }
 });
   
-/* sign in fetch************/
+
+/*SIGN IN*/
 
 app.post('/sign-in', (req, res) => {
 
@@ -91,7 +96,7 @@ app.listen(port, () => {
 });
 
 /*** USERS CRUD ***/
-
+/*CREATE FROM ADMIN*/
 app.post('/create-new-user', async (req, res) => {
 
   try {
@@ -102,7 +107,7 @@ app.post('/create-new-user', async (req, res) => {
     res.status(500).json('Error form the sever side');
   }
 });
-
+/*GET ALL USERS*/
 app.get('/get-all-users', async (req, res) => {
 
   try {
@@ -112,7 +117,7 @@ app.get('/get-all-users', async (req, res) => {
     res.status(500).json({ error: err.code });
   }
 });
-
+/*GET BY ID*/
 app.get(`/get-by-id/:userId`, async (req, res) => {
   const userId = req.params.userId
   try {
@@ -125,9 +130,7 @@ app.get(`/get-by-id/:userId`, async (req, res) => {
     res.status(500).json({error, error})
   }
 });
-
-/*********HERE**********/
-
+/*UPDATE USER*/
 app.put('/update-user/:userId', async (request, response) => {
   const userId = request.params.userId
   console.log('User Id is -------------->', request.params)
@@ -137,13 +140,10 @@ app.put('/update-user/:userId', async (request, response) => {
     response.status(200).json({ message: 'OK' })
   } catch (error) {
     console.log(error)
-    response.status(500).json({ error: 'DAMN' }); ///********************** check out this later */
+    response.status(500).json({ error: error }); ///********************** check out this later */
   }
 });
-
-
-/**********DONE***********/
-
+/*DELETE USER*/
 app.delete(`/delete-user/:userId`, async (req, res) => {
   const userId = req.params.userId
   try {

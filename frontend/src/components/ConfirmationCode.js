@@ -1,4 +1,4 @@
-import React, { useRef} from 'react';
+import React, { useRef } from 'react';
 import '../styles/confirmationCode.css';
 import useConfirmationCode from '../hooks/useConfirmationCode';
 import { Link } from 'react-router-dom';
@@ -44,6 +44,26 @@ const ConfirmationCode = () => {
     }
   };
 
+  const handleCodePaste = (e, currentFieldName) => {
+    e.preventDefault();
+    const pastedData = e.clipboardData.getData('text');
+    const codeCharacters = pastedData.split('');
+
+    let currentIndex = Object.keys(inputRefs).indexOf(currentFieldName);
+    codeCharacters.forEach((character, index) => {
+      const fieldName = Object.keys(inputRefs)[currentIndex + index];
+      if (fieldName) {
+        handleChange({
+          target: {
+            name: fieldName,
+            value: character
+          }
+        });
+      }
+    });
+  };
+
+
   const getPreviousFieldName = (currentFieldName) => {
     const fieldNames = Object.keys(inputRefs);
     const currentFieldIndex = fieldNames.indexOf(currentFieldName);
@@ -51,7 +71,7 @@ const ConfirmationCode = () => {
   };
 
   const handleDisabled = () => {
-    return !form.verificationCodeOne || !form.verificationCodeTwo  || !form.verificationCodeThree  || !form.verificationCodeFour
+    return !form.verificationCodeOne || !form.verificationCodeTwo || !form.verificationCodeThree || !form.verificationCodeFour
   };
 
   return (
@@ -67,6 +87,7 @@ const ConfirmationCode = () => {
             name='verificationCodeOne'
             placeholder='-'
             maxLength='1'
+            onPaste={(e) => handleCodePaste(e, 'verificationCodeOne')}
             onChange={(e) => handleCodeChange(e, 'verificationCodeOne', 'verificationCodeTwo')}
             value={form.verificationCodeOne}
             ref={inputRefs.verificationCodeOne}
@@ -77,6 +98,7 @@ const ConfirmationCode = () => {
             name='verificationCodeTwo'
             placeholder='-'
             maxLength='1'
+            onPaste={(e) => handleCodePaste(e, 'verificationCodeTwo')}
             onChange={(e) => handleCodeChange(e, 'verificationCodeTwo', 'verificationCodeThree')}
             value={form.verificationCodeTwo}
             ref={inputRefs.verificationCodeTwo}
@@ -87,6 +109,7 @@ const ConfirmationCode = () => {
             name='verificationCodeThree'
             placeholder='-'
             maxLength='1'
+            onPaste={(e) => handleCodePaste(e, 'verificationCodeThree')}
             onChange={(e) => handleCodeChange(e, 'verificationCodeThree', 'verificationCodeFour')}
             value={form.verificationCodeThree}
             ref={inputRefs.verificationCodeThree}
@@ -97,6 +120,7 @@ const ConfirmationCode = () => {
             name='verificationCodeFour'
             placeholder='-'
             maxLength='1'
+            onPaste={(e) => handleCodePaste(e, 'verificationCodeFour')}
             onChange={(e) => handleCodeChange(e, 'verificationCodeFour', null)}
             value={form.verificationCodeFour}
             ref={inputRefs.verificationCodeFour}
@@ -105,7 +129,7 @@ const ConfirmationCode = () => {
 
         <div className='resend'>RESEND CODE</div>
         <br></br>
-        {loading && <Loader/>}
+        {loading && <Loader />}
         {response && <Message msg={`${serverError}`} bgColor="dc3545" />}
         <br></br>
         <button
