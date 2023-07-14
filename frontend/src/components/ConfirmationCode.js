@@ -78,7 +78,7 @@ const ConfirmationCode = () => {
     <div className='App'>
       <Link className='back-btn' to={'/'} style={{ display: 'inline-block', marginRight: '100%' }}>&#8249;</Link>
       <h1 className='title'>Please check your email</h1>
-      <h3 className='paragraph'>We have sent a confirmation code to the email: </h3>
+      <h3 className='paragraph'>We've sent a verification code</h3>
 
       <form onSubmit={handleSubmit}>
         <div className='input-group'>

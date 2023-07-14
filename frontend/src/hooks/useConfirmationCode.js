@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 const useConfirmationCode = (initialForm) => {
   const [form, setForm] = useState(initialForm)
@@ -7,6 +7,11 @@ const useConfirmationCode = (initialForm) => {
   const [response, setResponse] = useState(null)
   const [serverError, setServerError] = useState(null)
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const newUserId = location.state?.newUserId
+
+  console.log('Id from useConfirmationCode------>', newUserId)
 
   const handleChange= (e) => {
     const {name,value} = e.target;

@@ -56,14 +56,14 @@ app.post('/register', async (req, res) => {
     const verification_code = mailerConfig.codeGenerator();
     const newUser = await dbUsers.createUser(client, req.body)
     let user_id = newUser.rows[0].id
-    console.log('try id-->', user_id, ' try code --->', verification_code)
+    // console.log('try id-->', user_id, ' try code --->', verification_code)
     /*Foreign table query*/
     const foreignTable = await mailerConfig.insertVerificationCodeForeignKey(client, user_id, verification_code)
     let foreign_table_rowCount = foreignTable.rowCount
 
     if (foreign_table_rowCount > 0) {
       await mailerConfig.sendVerificationEmail(req.body.email, verification_code);
-      res.status(200).json({ message: 'User created successfully ' })
+      res.status(200).json(user_id)
     }
 
   } catch (error) {
