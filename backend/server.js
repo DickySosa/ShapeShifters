@@ -16,7 +16,7 @@ const dbUsers = require('./db/users')
 const usersCrud = require('./controlers/usersCRUD')
 
 /* importing mailer.js */
-const mailerConfig = require('./mailerConfig/mailer') 
+const mailerConfig = require('./mailerConfig/mailer')
 
 /** Client config to 
 * be able to connect to local database
@@ -41,7 +41,7 @@ const user_data = `CREATE TABLE IF NOT EXISTS users_data (
     password VARCHAR(255) NOT NULL
   );`;
 
-  const verification_code = `CREATE TABLE IF NOT EXISTS verification_code (
+const verification_code = `CREATE TABLE IF NOT EXISTS verification_code (
     id SERIAL PRIMARY KEY,
     code VARCHAR(4) NOT NULL,
     user_id INTEGER NOT NULL,
@@ -49,29 +49,29 @@ const user_data = `CREATE TABLE IF NOT EXISTS users_data (
     FOREIGN KEY (user_id) REFERENCES users_data(id)
   );`;
 
-  /*REGISTER*/
+/*REGISTER*/
 app.post('/register', async (req, res) => {
 
   try {
-    const verificationCode = mailerConfig.codeGenerator();
-
+    const verification_code = mailerConfig.codeGenerator();
     const newUser = await dbUsers.createUser(client, req.body)
-    // console.log('req------>', req)
-    // console.log('req.body------>', req.body)
-    // console.log( 'try new user ----->', newUser)
-    // console.log( 'try new user  rows ----->', newUser.rows)    *****whatch this tomorrow
+    let user_id = newUser.rows[0].id
+    console.log('try id-->', user_id, ' try code --->', verification_code)
+    /*Foreign table query*/
+    const foreignTable = await mailerConfig.insertVerificationCodeForeignKey(client, user_id, verification_code)
+    let foreign_table_rowCount = foreignTable.rowCount
 
-    await mailerConfig.sendVerificationEmail(req.body.email, verificationCode);
+    if (foreign_table_rowCount > 0) {
+      await mailerConfig.sendVerificationEmail(req.body.email, verification_code);
+      res.status(200).json({ message: 'User created successfully ' })
+    }
 
-    // await mailerConfig.insertVerificationCodeForeignKey(client,newUser.id, verificationCode)
-
-    res.status(200).json({ message: 'User created successfully ' + 'new user ------> ', newUser })
   } catch (error) {
     console.error('Error creating user:', error);
     res.status(500).json({ RegistingErrors: error.code });
   }
 });
-  
+
 
 /*SIGN IN*/
 
@@ -121,13 +121,13 @@ app.get('/get-all-users', async (req, res) => {
 app.get(`/get-by-id/:userId`, async (req, res) => {
   const userId = req.params.userId
   try {
-    const response = await usersCrud.getUserById(client, userId )
+    const response = await usersCrud.getUserById(client, userId)
     const respData = await response;
     console.log('The response is------------>', response)
-    res.status(200).json({message: respData.rows})
+    res.status(200).json({ message: respData.rows })
   } catch (error) {
     console.log(error)
-    res.status(500).json({error, error})
+    res.status(500).json({ error, error })
   }
 });
 /*UPDATE USER*/

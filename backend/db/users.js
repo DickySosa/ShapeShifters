@@ -3,7 +3,7 @@ const TABLE_NAME = 'users_data';
 const createUser = (client, createNewUser) => {
     const { username, email, password } = createNewUser
     const registerQuery = {
-        text: `INSERT INTO ${TABLE_NAME} (username, email, password) VALUES ($1, $2, $3)`,
+        text: `INSERT INTO ${TABLE_NAME} (username, email, password) VALUES ($1, $2, $3) RETURNING id`,
         values: [username, email, password],
     };
 
