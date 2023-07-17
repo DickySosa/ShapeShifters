@@ -103,7 +103,7 @@ const useRegister = (initialForm, validateForm) => {
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
   const [serverError, setServerError] = useState(null);
-  const [newUserId, setNewUserId] = useState([]);
+  const [newUserId, setNewUserId] = useState(0);
   const navigate = useNavigate();
   const handleNavigation = (path, state) => {
     navigate(path, state);
@@ -148,14 +148,11 @@ const useRegister = (initialForm, validateForm) => {
     });
 
     const data = await response.json();
-    console.log('try json data register ---------> ', data);
-    console.log('try json data register ---------> ', data.rows);
-    console.log('try json data register ---------> ', data.rows[0]);
-    console.log('try json data register ---------> ', data.rows[0].id);
+    console.log('try json data register data ---------> ', data);
 
-    setNewUserId(data.rows[0].id); // Guardar el ID del usuario en newUserId
+    setNewUserId(data); // Guardar el ID del usuario en newUserId
 
-    console.log('este es el hook --->',newUserId)
+    console.log('este es el hook --->', newUserId ) 
 
     setLoading(false);
     setResponse(true);
