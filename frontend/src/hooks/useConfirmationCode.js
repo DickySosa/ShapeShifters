@@ -9,7 +9,7 @@ const useConfirmationCode = (initialForm) => {
   const navigate = useNavigate();
 
   const location = useLocation();
-  const newUserId = location.state?.newUserId
+  const newUserId = location.state?.theData
 
   console.log('Id from useConfirmationCode------>', newUserId)
 
