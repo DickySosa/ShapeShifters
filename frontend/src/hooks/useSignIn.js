@@ -44,13 +44,11 @@ const useSignIn = (initialForm, validateForm) => {
 			}) 
 
 			const data = await fetchRequest.json()
-			console.log('try json data sign in ---------> ', data);
 
 			setLoading(false);
             setResponse(true);
 
 			if(!data.SignInErrors && data.Result > 0){
-				console.log('User exist');
 				navigate('/home')
 			} else {
 			setLoading(false);

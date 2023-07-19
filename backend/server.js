@@ -163,9 +163,7 @@ app.post('/verification-code/:userId', async (request, response) => {
   try {
     const codeRequest = await mailerConfig.requestVerificationCode(client,userId, request.body.code)
     console.log('Try code request-->',codeRequest)
-    const codeGet = await codeRequest
-    console.log(codeGet)
-    response.status(200).json(codeGet)
+    response.status(200).json(codeRequest.rowCount)
   } catch (error) {
     console.log('Error: User Id does not exist', error)
     response.status(500).json({ error: 'User id does not exist' })

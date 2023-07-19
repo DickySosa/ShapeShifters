@@ -27,7 +27,6 @@ function SwitchScreens() {
   }
 
   useEffect(() => {
-    console.log("change is happening ...", forms)
     const activeForm = forms.find(item => item.active).form()
     SetActiveForm(activeForm)
   }, [forms])
