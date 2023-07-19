@@ -32,6 +32,10 @@ client.connect()
   .catch((err) => {
     console.error('Error connecting to the PostgreSQL database:', err);
   });
+  const port = 9000;
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
 
 /* Registration fetch**************/
 const user_data = `CREATE TABLE IF NOT EXISTS users_data (  
@@ -40,7 +44,7 @@ const user_data = `CREATE TABLE IF NOT EXISTS users_data (
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
   );`;
-
+/*Foreign verification code table*/
 const verification_code = `CREATE TABLE IF NOT EXISTS verification_code (
     id SERIAL PRIMARY KEY,
     code VARCHAR(4) NOT NULL,
@@ -56,8 +60,6 @@ app.post('/register', async (req, res) => {
     const verification_code = mailerConfig.codeGenerator();
     const newUser = await dbUsers.createUser(client, req.body)
     let user_id = newUser.rows[0].id
-    // console.log('try id-->', user_id, ' try code --->', verification_code)
-    /*Foreign table query*/
     const foreignTable = await mailerConfig.insertVerificationCodeForeignKey(client, user_id, verification_code)
     let foreign_table_rowCount = foreignTable.rowCount
 
@@ -90,12 +92,8 @@ app.post('/sign-in', (req, res) => {
 
 });
 
-const port = 9000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
-
 /*** USERS CRUD ***/
+
 /*CREATE FROM ADMIN*/
 app.post('/create-new-user', async (req, res) => {
 
@@ -107,6 +105,7 @@ app.post('/create-new-user', async (req, res) => {
     res.status(500).json('Error form the sever side');
   }
 });
+
 /*GET ALL USERS*/
 app.get('/get-all-users', async (req, res) => {
 
@@ -117,6 +116,7 @@ app.get('/get-all-users', async (req, res) => {
     res.status(500).json({ error: err.code });
   }
 });
+
 /*GET BY ID*/
 app.get(`/get-by-id/:userId`, async (req, res) => {
   const userId = req.params.userId
@@ -130,6 +130,7 @@ app.get(`/get-by-id/:userId`, async (req, res) => {
     res.status(500).json({ error, error })
   }
 });
+
 /*UPDATE USER*/
 app.put('/update-user/:userId', async (request, response) => {
   const userId = request.params.userId
@@ -143,6 +144,7 @@ app.put('/update-user/:userId', async (request, response) => {
     response.status(500).json({ error: error }); ///********************** check out this later */
   }
 });
+
 /*DELETE USER*/
 app.delete(`/delete-user/:userId`, async (req, res) => {
   const userId = req.params.userId
@@ -153,3 +155,20 @@ app.delete(`/delete-user/:userId`, async (req, res) => {
     res.status(500).json('Something  went wrong ' + error)
   }
 });
+
+
+/*VERIFY IF THE CONFIRMATION CODE IS CORRECT*/
+app.post('/verification-code/:userId', async (request, response) => {
+  const userId = request.params.userId
+  try {
+    const codeRequest = await mailerConfig.requestVerificationCode(client,userId, request.body.code)
+    console.log('Try code request-->',codeRequest)
+    const codeGet = await codeRequest
+    console.log(codeGet)
+    response.status(200).json(codeGet)
+  } catch (error) {
+    console.log('Error: User Id does not exist', error)
+    response.status(500).json({ error: 'User id does not exist' })
+    console.log(error)
+  }
+})
