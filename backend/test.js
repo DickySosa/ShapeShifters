@@ -18,21 +18,19 @@ const arrayExam = [1, 2, 3, 4, 5, 6, 7];
 /*change here*/
 Array.prototype.dickMap = function (callback) {
     for (let i = 0; i < this.length; i++) {
-        const result = this[i] + this[i]
-        return result
+        return  this[i] * this[i]
     }
     callback(result);
 };
-console.log(dickMap())
 
 // execute here 
-arrayExam.dickMap((number) => {
-    number = 5;
-    console.log(number);
+const myHof = arrayExam.dickMap((number) => {
+    return number * number
 });
 
+console.log(myHof)
 
-console.log('Hola');
+console.log('result above');
 
 // function prueba2 (){
 //     for (let i = 0; i < arrayExam.length; i++) {
