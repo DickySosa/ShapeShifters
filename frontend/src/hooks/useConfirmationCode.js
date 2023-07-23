@@ -42,7 +42,7 @@ const useConfirmationCode = (initialForm) => {
         body: JSON.stringify(verify)
       })
 
-      if (sendCode.error) {
+      if (!sendCode.ok) {
         throw new Error('Network response was not ok');
       }
 
