@@ -1,4 +1,4 @@
-import { useState} from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -34,29 +34,36 @@ const useSignIn = (initialForm, validateForm) => {
 
 		setLoading(true)
 
-	
-			const fetchRequest = await fetch('http://localhost:9000/sign-in',{
+
+		try {
+
+			const fetchRequest = await fetch('http://localhost:9000/sign-in', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify(form)
-			}) 
+			})
 
+			if (!fetchRequest.ok) {
+				throw new Error('Network response was not ok');
+			}
 			const data = await fetchRequest.json()
-
 			setLoading(false);
-            setResponse(true);
-
-			if(!data.SignInErrors && data.Result > 0){
+			setResponse(true);
+			if (!data.SignInErrors && data.Result > 0) {
 				navigate('/home')
 			} else {
-			setLoading(false);
-			if(data.Result === 0){
-				setServerError('Please verify if the user or the password is correct')
+				setLoading(false);
+				if (data.Result === 0) {
+					setServerError('Please verify if the user or the password is correct')
+				}
 			}
+		} catch (error) {
+			setLoading(false);
+			setServerError('There was an error during the request.');
+			console.error(error);
 		}
-
 	}
 
 

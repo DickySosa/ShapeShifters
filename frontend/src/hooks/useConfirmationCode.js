@@ -64,7 +64,6 @@ const useConfirmationCode = (initialForm) => {
       setServerError('There was an error during the request.');
       console.error(error);
     }
-
   }
 
   return {
