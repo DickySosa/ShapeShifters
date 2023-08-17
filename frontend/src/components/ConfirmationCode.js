@@ -30,10 +30,10 @@ const ConfirmationCode = () => {
   };
 
   const handleCodeChange = (e, currentFieldName, nextFieldName) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
     handleChange(e);
 
-    if (value.length > 0 && nextFieldName) {
+    if (value.length && nextFieldName) {
       inputRefs[nextFieldName].current.focus(); // Mover el foco al siguiente campo
     } else if (value.length === 0 && currentFieldName) {
       const previousFieldName = getPreviousFieldName(currentFieldName);
@@ -49,28 +49,6 @@ const ConfirmationCode = () => {
     const currentFieldIndex = fieldNames.indexOf(currentFieldName);
     return fieldNames[currentFieldIndex - 1];
   };
-  
-  //This doesnt work
-  // const handleCodePaste = (e, currentFieldName) => {
-  //   e.preventDefault();
-  //   const pastedData = e.clipboardData.getData('text');
-  //   const codeCharacters = pastedData.split('');
-
-  //   let currentIndex = Object.keys(inputRefs).indexOf(currentFieldName);
-  //   codeCharacters.forEach((character, index) => {
-  //     const fieldName = Object.keys(inputRefs)[currentIndex + index];
-  //     if (fieldName) {
-  //       handleChange({
-  //         target: {
-  //           name: fieldName,
-  //           value: character
-  //         }
-  //       });
-  //     }
-  //   });
-  // };
-
-
   
 
   const handleDisabled = () => {
@@ -90,7 +68,6 @@ const ConfirmationCode = () => {
             name='verificationCodeOne'
             placeholder='-'
             maxLength='1'
-            // onPaste={(e) => handleCodePaste(e, 'verificationCodeOne')}
             onChange={(e) => handleCodeChange(e, 'verificationCodeOne', 'verificationCodeTwo')}
             value={form.verificationCodeOne}
             ref={inputRefs.verificationCodeOne}
@@ -101,7 +78,6 @@ const ConfirmationCode = () => {
             name='verificationCodeTwo'
             placeholder='-'
             maxLength='1'
-            // onPaste={(e) => handleCodePaste(e, 'verificationCodeTwo')}
             onChange={(e) => handleCodeChange(e, 'verificationCodeTwo', 'verificationCodeThree')}
             value={form.verificationCodeTwo}
             ref={inputRefs.verificationCodeTwo}
@@ -112,7 +88,6 @@ const ConfirmationCode = () => {
             name='verificationCodeThree'
             placeholder='-'
             maxLength='1'
-            // onPaste={(e) => handleCodePaste(e, 'verificationCodeThree')}
             onChange={(e) => handleCodeChange(e, 'verificationCodeThree', 'verificationCodeFour')}
             value={form.verificationCodeThree}
             ref={inputRefs.verificationCodeThree}
@@ -123,7 +98,6 @@ const ConfirmationCode = () => {
             name='verificationCodeFour'
             placeholder='-'
             maxLength='1'
-            // onPaste={(e) => handleCodePaste(e, 'verificationCodeFour')}
             onChange={(e) => handleCodeChange(e, 'verificationCodeFour', null)}
             value={form.verificationCodeFour}
             ref={inputRefs.verificationCodeFour}
